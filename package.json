@@ -1,0 +1,30 @@
+{
+  "name": "ballonwholesale",
+  "version": "1.0.0",
+  "description": "Balloon website first version",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "server": "nodemon index.js",
+    "balloon": "npm start --prefix balloon",
+    "dev": "concurrently \"npm run server\" \"npm run balloon\""
+  },
+  "keywords": [
+    "balloon",
+    "ecommerce"
+  ],
+  "author": "Daniel Fazzino",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.1",
+    "nodemon": "^2.0.22",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "validator": "^13.9.0"
+  }
+}
