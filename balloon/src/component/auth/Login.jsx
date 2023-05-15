@@ -53,8 +53,8 @@ const Login = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full justify-center items-center bg-[#007dc5]">
-      <div class="fixed inset-0 flex justify-center items-center">
-        <div class="bg-white shadow max-w-md w-full rounded-lg p-6">
+      <div className="fixed inset-0 flex justify-center items-center">
+        <div className="bg-white shadow max-w-md w-full rounded-lg p-6">
           <div className="w-full h-full max-w-md md:h-auto">
             <div className="relative">
               <div className="px-6 py-6 lg:px-8">

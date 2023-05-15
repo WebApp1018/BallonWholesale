@@ -1,5 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth } from './app/authSlice';
 import Home from './component/landing/home/Home';
 import Balloons from './component/landing/balloons/Balloons';
 import BalloonDetail from './component/landing/balloons/BalloonDetail';
@@ -11,6 +13,8 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const auth = useSelector(getAuth);
+
   return (
     <div className="App">
       <Routes>
@@ -32,10 +36,18 @@ function App() {
           } />
         <Route
           path='/admin/balloon_setting'
-          element={<AdBalloons />} />
+          element={
+            <PrivateRoute auth={localStorage.jwtToken}>
+              <AdBalloons />
+            </PrivateRoute>
+          } />
         <Route
           path='/admin/category'
-          element={<AdCategory />} />
+          element={
+            <PrivateRoute auth={localStorage.jwtToken}>
+              <AdCategory />
+            </PrivateRoute>
+          } />
       </Routes>
     </div>
   );

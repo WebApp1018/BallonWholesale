@@ -21,6 +21,7 @@ export const authSlice = createSlice({
     logoutUser: (state, action) => {
       // Remove token from localStorage
       localStorage.removeItem("jwtToken");
+
       // Remove auth header for future request
       setAuthToken(false);
       // Set current user to {} which will set isAuthenticated to false

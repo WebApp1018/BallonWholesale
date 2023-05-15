@@ -4,7 +4,6 @@ import { Navigate } from "react-router-dom";
 
 const PrivateRoute = ({
   auth,
-  role,
   // permition = 'user',
   redirectPath = '/login',
   children,

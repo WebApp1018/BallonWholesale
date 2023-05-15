@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-// import { logoutUser } from "../../../app/authSlice";
+import { logoutUser } from "../../../app/authSlice";
 import SideBar from "./AdSideBar";
 import NavBar from "./AdNavBar";
 
@@ -15,13 +15,13 @@ const AdLayout = () => {
         toggleBar={() => {
           setShowSideBar(show_side_bar ? false : true);
         }}
-        // logout={() => dispatch(logoutUser())}
+        logout={() => dispatch(logoutUser())}
       />
       <NavBar
         toggleBar={() => {
           setShowSideBar(show_side_bar ? false : true);
         }}
-        // logout={() => dispatch(logoutUser())}
+        logout={() => dispatch(logoutUser())}
       />
     </>
   );

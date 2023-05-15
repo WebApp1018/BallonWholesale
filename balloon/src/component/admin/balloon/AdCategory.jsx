@@ -1,24 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showCategory, getCategoryAsync } from "../../../app/categorySlice";
 import { Toaster } from "react-hot-toast";
 import classNames from "classnames";
 import Layout from "../layout/AdLayout";
-
-const categories = [
-  { sn: "GR", name: "Category1" },
-  { sn: "H", name: "Category1" },
-  { sn: "PH", name: "Category1" },
-  { sn: "PW", name: "Category1" },
-  { sn: "FA", name: "Category1" },
-  { sn: "EH", name: "Category1" },
-  { sn: "M", name: "Category1" },
-  { sn: "LC", name: "Category1" },
-];
+import AdAddCategory from "./AdAddCategory";
+import AdRemoveCategory from "./AdRemoveCategory";
 
 const AdCategory = () => {
-  const [category, setCategory] = useState(categories[0].sn);
-  const [detail, setDetail] = useState("");
+  const dispatch = useDispatch();
+  const categoryies = useSelector(showCategory);
+
+  const [category, setCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState();
   const [showModal, setShowModal] = useState("none");
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    dispatch(getCategoryAsync());
+  }, []);
+
+  useEffect(() => {
+    if (categoryies) {
+      setCategory(categoryies);
+    }
+  }, [categoryies]);
 
   const openModal = (e) => {
     window.scrollTo(0, 0);
@@ -32,7 +38,7 @@ const AdCategory = () => {
   };
 
   const displayInfo = (e) => {
-    setCategory(e.target.getAttribute("category-key"));
+    setSelectedCategory(e.target.getAttribute("category-key"));
     // dispatch(getBookingSettingAsync(e.target.getAttribute("category-key")));
   };
 
@@ -42,10 +48,11 @@ const AdCategory = () => {
 
   return (
     <div>
+      <Toaster position="top-right" />
       <Layout />
       <div className="mt-[70px] p-4 sm:ml-64 flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/4 text-gray-600 text-base rounded mr-4">
-          {categories.map((item, index) => {
+          {category.map((item, index) => {
             return (
               <div
                 key={index}
@@ -57,14 +64,14 @@ const AdCategory = () => {
                   "hover:bg-[#002f75]",
                   "hover:text-white",
                   {
-                    "bg-[#002f75]": category === item.sn,
-                    "text-white": category === item.sn,
+                    "bg-[#002f75]": selectedCategory === item._id,
+                    "text-white": selectedCategory === item._id,
                   }
                 )}
               >
                 <button
                   className="w-full py-2"
-                  category-key={item.sn}
+                  category-key={item._id}
                   onClick={(e) => displayInfo(e)}
                 >
                   {item.name}
@@ -113,38 +120,6 @@ const AdCategory = () => {
               onChange={(e) => setCategory(e.target.value)}
             />
           </div>
-          <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium text-gray-900">
-              Description
-            </label>
-            <textarea
-              rows="4"
-              className={classNames(
-                "block",
-                "p-2.5",
-                "w-full",
-                "text-sm",
-                "text-gray-900",
-                "bg-gray-50",
-                "rounded-lg",
-                "border",
-                "focus:ring-blue-500",
-                "focus:border-blue-500",
-                {
-                  "border-red-500": errors.detail,
-                  "border-gray-300": !errors.detail,
-                }
-              )}
-              placeholder="Leave a comment..."
-              onChange={(e) => setDetail(e.target.value)}
-              value={detail}
-            ></textarea>
-            {errors.detail && (
-              <p className="mt-2 text-xs text-red-600 dark:text-red-500">
-                <span className="font-medium">Oh, snapp!</span> {errors.detail}
-              </p>
-            )}
-          </div>
           <div className="flex flex-col sm:flex-row">
             <button
               className="px-5 py-2 border text-white bg-[#002f75] hover:border-[#002f75] hover:bg-white hover:text-[#002f75]"
@@ -166,28 +141,6 @@ const AdCategory = () => {
                   />
                 </svg>
                 Save Setting
-              </div>
-            </button>
-            <button
-              className="px-5 py-2 border text-white bg-[#002f75] hover:border-[#002f75] hover:bg-white hover:text-[#002f75]"
-              onClick={(e) => openModal("edit")}
-            >
-              <div className="w-fit flex mx-auto">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                  />
-                </svg>
-                Edit Category
               </div>
             </button>
             <button
@@ -215,6 +168,12 @@ const AdCategory = () => {
           </div>
         </div>
       </div>
+      <AdAddCategory show={showModal} closeModal={closeModal} />
+      <AdRemoveCategory show={showModal} closeModal={closeModal} />
+      <div
+        className="absolute w-full h-[100%] bg-[#010101] bg-opacity-80 z-[50] left-0 top-0"
+        style={{ display: showModal === "none" ? "none" : "block" }}
+      />
     </div>
   );
 };
