@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <Topbar />
-      <div className="">
+      <div className="mb-[50px]">
         <div className="w-full mt-1">
           <img
             src="assets/img/header.jpg"

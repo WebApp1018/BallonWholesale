@@ -15,7 +15,7 @@ const Topbar = () => {
     <div className="w-full h-[70px] shadow-lg flex justify-between items-center bg-white  z-[50]">
       <div className="ml-[25px] sm:ml-[50px]">
         <Link to="/">
-          <img className="w-[150px]" src="assets/img/Logo.png" alt="logo" />
+          <img className="w-[150px]" src="/assets/img/Logo.png" alt="logo" />
         </Link>
       </div>
       <div className="flex items-center">
@@ -92,7 +92,7 @@ const Topbar = () => {
               <Link to="/">
                 <img
                   className="w-[350px]"
-                  src="assets/img/Logo.png"
+                  src="/assets/img/Logo.png"
                   alt="logo"
                 />
               </Link>
