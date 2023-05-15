@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
+import Login from './component/auth/Login';
 import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -13,6 +14,7 @@ root.render(
   <Provider store={store}>
     <Router>
       <Routes>
+        <Route path='/login' element={<Login />} />
         <Route path='/*' element={<App />} />
       </Routes>
     </Router>

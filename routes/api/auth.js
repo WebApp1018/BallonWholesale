@@ -9,10 +9,45 @@ const configVars = require("../../config/keys");
 //Load Models
 const User = require("../../models/User");
 
+//Load Validations
+const validateLoginInput = require("../../validation/login");
+
 //@route    GET api/auth/test
 //@desc     Tests auth route
 //@access   Public
 router.get("/test", (req, res) => res.status(200).json({ msg: "Auth Works!" }));
+
+//@route    POST api/auth/register
+//@desc     Resigter auth route
+//@access   Public
+router.post("/register", (req, res) => {
+
+  User.findOne({ email: req.body.email }).then(user => {
+
+    if (user) {
+      errors.email = "Email already exists";
+      return res.status(409).json(errors);
+    } else {
+      const newUser = new User({
+        email: req.body.email,
+        password: req.body.password
+      });
+
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => {
+              res.status(201).json(user);
+            })
+            .catch(err => console.log(err));
+        });
+      });
+    }
+  });
+});
 
 //@route    POST api/auth/login
 //@desc     Login user / Returning JWT Token

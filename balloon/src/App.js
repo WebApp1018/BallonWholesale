@@ -6,6 +6,7 @@ import BalloonDetail from './component/landing/balloons/BalloonDetail';
 import AdDashboard from './component/admin/dashboard/AdDashboard';
 import AdBalloons from './component/admin/balloon/AdBalloons';
 import AdCategory from './component/admin/balloon/AdCategory';
+import PrivateRoute from './utils/PrivateRoute';
 import logo from './logo.svg';
 import './App.css';
 
@@ -24,13 +25,17 @@ function App() {
           element={<BalloonDetail />} />
         <Route
           path='/admin'
-          element={<AdDashboard />} />
+          element={
+            <PrivateRoute auth={localStorage.jwtToken}>
+              <AdDashboard />
+            </PrivateRoute>
+          } />
         <Route
           path='/admin/balloon_setting'
           element={<AdBalloons />} />
         <Route
           path='/admin/category'
-          element={<AdBalloons />} />
+          element={<AdCategory />} />
       </Routes>
     </div>
   );
