@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showCategory, getCategoryAsync } from "../../../app/categorySlice";
 import { Link } from "react-router-dom";
 
 const Topbar = () => {
   const [menu, setMenu] = useState(false);
 
+  const dispatch = useDispatch();
+  const categories = useSelector(showCategory);
+
+  useEffect(() => {
+    dispatch(getCategoryAsync());
+  }, []);
+
   const toggleMenu = () => {
-    // menu
-    //   ? (document.body.style.overflow = "auto")
-    //   : (document.body.style.overflow = "hidden");
     menu ? setMenu(false) : setMenu(true);
   };
 
   return (
-    <div className="w-full h-[70px] shadow-lg flex justify-between items-center bg-white  z-[50]">
+    <div className="w-full h-[70px] shadow-lg flex justify-between items-center bg-white z-[50] font-sans">
       <div className="ml-[25px] sm:ml-[50px]">
         <Link to="/">
           <img className="w-[150px]" src="/assets/img/Logo.png" alt="logo" />
@@ -23,23 +29,23 @@ const Topbar = () => {
           <li>
             <Link
               to="/"
-              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#e6c823]"
+              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
             >
               Home
             </Link>
           </li>
           <li className="mx-[57px]">
             <Link
-              to="/balloons"
-              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#e6c823]"
+              to="/balloons/all"
+              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
             >
               Balloons
             </Link>
           </li>
           <li className="mx-[57px]">
             <Link
-              to="/category"
-              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#e6c823]"
+              to="/balloons/all"
+              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
             >
               Category
             </Link>
@@ -47,7 +53,7 @@ const Topbar = () => {
           <li className="mx-[57px]">
             <Link
               to="/contact"
-              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#e6c823]"
+              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
             >
               Contact Us
             </Link>
@@ -55,7 +61,7 @@ const Topbar = () => {
           <li className="mx-[57px]">
             <Link
               to="/about"
-              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#e6c823]"
+              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
             >
               About Us
             </Link>
@@ -63,7 +69,7 @@ const Topbar = () => {
         </ul>
       </div>
       <div className="mr-[50px] text-[#404040] hidden lg:block">
-        <div className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#e6c823]">
+        <div className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]">
           How To Buy?
         </div>
       </div>
@@ -108,7 +114,7 @@ const Topbar = () => {
                 className="w-6 h-6 text-white"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
                   clipRule="evenodd"
                 />
@@ -119,31 +125,43 @@ const Topbar = () => {
             <li>
               <Link
                 to="/"
-                className="block py-2 pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#e6c823]"
+                className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
               >
                 Home
               </Link>
             </li>
             <li>
               <Link
-                to="/balloons"
-                className="block py-2 pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#e6c823]"
+                to="/balloons/all"
+                className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
               >
                 Balloons
               </Link>
             </li>
             <li>
               <Link
-                to="/category"
-                className="block py-2 pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#e6c823]"
+                to="/balloons/all"
+                className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
               >
                 Category
               </Link>
             </li>
             <li>
+              {categories &&
+                categories.map((category, ind) => (
+                  <Link
+                    key={ind}
+                    to={`/balloons/${category?.name}`}
+                    className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[16px] font-light md:hover:text-[#007dc5]"
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+            </li>
+            <li>
               <Link
                 to="/contact"
-                className="block py-2 pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#e6c823]"
+                className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
               >
                 Contact Us
               </Link>
@@ -151,7 +169,7 @@ const Topbar = () => {
             <li>
               <Link
                 to="/about"
-                className="block py-2 pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#e6c823]"
+                className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
               >
                 About Us
               </Link>

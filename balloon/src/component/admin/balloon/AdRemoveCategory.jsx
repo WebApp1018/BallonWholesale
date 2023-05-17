@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { getCategoryAsync } from "../../../app/categorySlice";
 import notify from "../../../utils/notify";
-// import { setCurrentUser } from "../../../app/profileSlice";
 
-const AdRemoveCategory = ({ show, closeModal }) => {
+const AdRemoveCategory = ({
+  show,
+  selectedCategory,
+  clearSelectedCategory,
+  closeModal,
+}) => {
   const dispatch = useDispatch();
-
-  const [errors, setErrors] = useState({});
-
-  useEffect(() => {
-    setErrors(errors);
-  }, [errors]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const new_phone = {};
+    const del_category = {
+      categoryId: selectedCategory,
+    };
 
     axios
       .post(
-        process.env.REACT_APP_API_BASE_URL + "api/profile/add_phone",
-        new_phone
+        process.env.REACT_APP_API_BASE_URL + "api/product/remove_category",
+        del_category
       )
       .then((res) => {
         closeModal();
-        setErrors({});
-        // dispatch(setCurrentUser(res.data));
+        dispatch(getCategoryAsync());
+        clearSelectedCategory();
         notify("You have successfully removed a category!", 1);
       })
-      .catch((err) => setErrors(err.response.data));
+      .catch((err) => notify("Something went wrong!", 0));
   };
 
   const clickCloseModal = () => {
     closeModal();
-    setErrors({});
   };
 
   return (

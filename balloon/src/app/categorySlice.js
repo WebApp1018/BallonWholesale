@@ -17,11 +17,9 @@ export const categorySlice = createSlice({
 
 // Get All Categories
 export const getCategoryAsync = () => async (dispatch) => {
-  console.log("slice")
   try {
     const response = await axios.get(process.env.REACT_APP_API_BASE_URL + "api/product/category");
     dispatch(setCategory(response.data));
-    console.log("response", response.data)
   } catch (err) {
     throw new Error(err);
   }

@@ -1,10 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import {
+  showProductByCategory,
+  getProdcutAsync,
+  getProdcutByCategoryAsync,
+} from "../../../app/productSlice";
+import { showCategory, getCategoryAsync } from "../../../app/categorySlice";
 import Topbar from "../layout/Topbar";
 import Footer from "../layout/Footer";
 import { Link } from "react-router-dom";
 
 const Balloons = () => {
+  const dispatch = useDispatch();
+  const { category_name } = useParams();
+  const productByCategory = useSelector(showProductByCategory);
+  const categories = useSelector(showCategory);
+
+  const [productToDisplay, setProductToDisplay] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState();
   const [categoryMenu, setCategoryMenu] = useState(true);
+
+  const itemsPerPage = 20;
+  const totalPages = Math.ceil(productByCategory?.length / itemsPerPage);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  useEffect(() => {
+    dispatch(getProdcutAsync());
+    dispatch(getCategoryAsync());
+  }, []);
+
+  useEffect(() => {
+    if (category_name) {
+      dispatch(getProdcutByCategoryAsync(category_name));
+      setSelectedCategory(category_name);
+    } else {
+      dispatch(getProdcutByCategoryAsync("all"));
+      setSelectedCategory("all");
+    }
+  }, [category_name]);
+
+  useEffect(() => {
+    if (productByCategory) {
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      setProductToDisplay(productByCategory.slice(startIndex, endIndex));
+    }
+  }, [productByCategory, currentPage, itemsPerPage]);
+
+  const displayProduct = (category = selectedCategory, page = 1) => {
+    if (!totalPages || (page && page <= totalPages)) {
+      setSelectedCategory(category);
+      setCurrentPage(page);
+      dispatch(getProdcutByCategoryAsync(category));
+    }
+  };
 
   const toggleCategory = () => {
     categoryMenu ? setCategoryMenu(false) : setCategoryMenu(true);
@@ -50,200 +101,88 @@ const Balloons = () => {
               />
             </svg>
           )}
-
           {categoryMenu ? "Show Balloons Category" : "Hide Balloons Category"}
         </div>
         {!categoryMenu ? (
           <div className="w-full bg-white shadow-lg">
-            <Link>
+            <Link onClick={(e) => displayProduct("all", 1)}>
               <div className="border border-l-2 border-l-[#007dc5] py-3 px-3 text-[#0a405f] font-bold hover:bg-[#36b5e7]">
                 All Balloons
               </div>
             </Link>
-            <Link>
-              <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
-                Category1
-              </div>
-            </Link>
-            <Link>
-              <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
-                Category1
-              </div>
-            </Link>
-            <Link>
-              <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
-                Category1
-              </div>
-            </Link>
-            <Link>
-              <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
-                Category1
-              </div>
-            </Link>
-            <Link>
-              <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
-                Category1
-              </div>
-            </Link>
+            {categories &&
+              categories.map((category, ind) => (
+                <Link
+                  key={ind}
+                  onClick={(e) => displayProduct(category.name, 1)}
+                >
+                  <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
+                    {category.name}
+                  </div>
+                </Link>
+              ))}
           </div>
         ) : null}
         <div className="flex justify-between mx-[15px] sm:mx-[100px] mt-[50px]">
           <div className="hidden sm:block w-1/4 h-fit bg-white mr-[50px] text-start shadow-lg">
-            <Link>
-              <div className="border border-l-2 border-l-[#007dc5] py-3 px-3 text-[#0a405f] font-bold hover:bg-[#36b5e7]">
+            <Link onClick={(e) => displayProduct("all", 1)}>
+              <div
+                className={`py-3 px-3 text-[#007dc5] font-bold ${
+                  selectedCategory === "all"
+                    ? "bg-[#36b5e7] border-l-[#007dc5] border-l-2 border text-white"
+                    : "bg-[#f1f1f1]"
+                }`}
+              >
                 All Balloons
               </div>
             </Link>
-            <Link>
-              <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
-                Category1
-              </div>
-            </Link>
-            <Link>
-              <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
-                Category1
-              </div>
-            </Link>
-            <Link>
-              <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
-                Category1
-              </div>
-            </Link>
-            <Link>
-              <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
-                Category1
-              </div>
-            </Link>
-            <Link>
-              <div className="border py-3 px-3 text-[#007dc5] font-bold hover:bg-[#f1f1f1]">
-                Category1
-              </div>
-            </Link>
+            {categories &&
+              categories.map((category, ind) => (
+                <Link
+                  key={ind}
+                  onClick={(e) => displayProduct(category.name, 1)}
+                >
+                  <div
+                    className={`border py-3 px-3 font-bold text-[#007dc5] ${
+                      selectedCategory === category.name
+                        ? "bg-[#36b5e7] border-l-[#007dc5] border-l-2 border text-white"
+                        : "bg-[#f1f1f1]"
+                    }`}
+                  >
+                    {category.name}
+                  </div>
+                </Link>
+              ))}
           </div>
           <div className="w-full sm:w-3/4">
-            <div className="w-full flex flex-wrap mb-[50px]">
-              <Link to="/balloon/detail">
-                <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                  <img
-                    src="assets/img/balloons3.png"
-                    className="px-3 py-2"
-                    alt=""
-                  />
-                  <div className="mt-3 mb-5">Balloons1</div>
-                </div>
-              </Link>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons4.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons5.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons1.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons2.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons3.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons4.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons5.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons3.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons4.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons5.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons1.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons2.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
-              <div className="w-[130px] sm:w-[200px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                <img
-                  src="assets/img/balloons3.png"
-                  className="px-3 py-2"
-                  alt=""
-                />
-                <div className="mt-3 mb-5">Balloons1</div>
-              </div>
+            <div className="flex flex-wrap justify-start mr-[-1rem] mb-[50px]">
+              {productToDisplay &&
+                productToDisplay.map((product, ind) => (
+                  <div
+                    key={ind}
+                    className="border rounded-lg shadow-lg flex-0 flex-shrink-1 mr-4 mb-4 basis-[43.5%] lg:basis-[18%] bg-white"
+                  >
+                    <Link to={`/balloon/detail/${product?.code}`}>
+                      <img
+                        src={`/assets/img/products/${product?.image}`}
+                        className="px-3 py-2"
+                        alt=""
+                      />
+                      <div className="mt-3 mb-5">{product?.name}</div>
+                    </Link>
+                  </div>
+                ))}
             </div>
 
             <nav aria-label="Page navigation example">
               <ul className="inline-flex items-center -space-x-px">
+                {/* render the "Previous" button */}
                 <li>
                   <Link
-                    to="#"
-                    className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    onClick={() =>
+                      displayProduct(selectedCategory, currentPage - 1)
+                    }
+                    className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
                   >
                     <span className="sr-only">Previous</span>
                     <svg
@@ -261,51 +200,26 @@ const Balloons = () => {
                     </svg>
                   </Link>
                 </li>
-                <li className="hidden sm:block">
-                  <Link
-                    to="#"
-                    className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    1
-                  </Link>
-                </li>
-                <li className="hidden sm:block">
-                  <Link
-                    to="#"
-                    className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    2
-                  </Link>
-                </li>
+                {/* render the page number links */}
+                {pageNumbers.map((pageNumber) => (
+                  <li key={pageNumber}>
+                    <Link
+                      onClick={() =>
+                        displayProduct(selectedCategory, pageNumber)
+                      }
+                      className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 "
+                    >
+                      {pageNumber}
+                    </Link>
+                  </li>
+                ))}
+                {/* render the "Next" button */}
                 <li>
                   <Link
-                    to="#"
-                    aria-current="page"
-                    className="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                  >
-                    3
-                  </Link>
-                </li>
-                <li className="hidden sm:block">
-                  <Link
-                    to="#"
-                    className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    4
-                  </Link>
-                </li>
-                <li className="hidden sm:block">
-                  <Link
-                    to="#"
-                    className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    5
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    onClick={() =>
+                      displayProduct(selectedCategory, currentPage + 1)
+                    }
+                    className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 "
                   >
                     <span className="sr-only">Next</span>
                     <svg

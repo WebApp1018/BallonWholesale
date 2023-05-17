@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showCategory, getCategoryAsync } from "../../../app/categorySlice";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const dispatch = useDispatch();
+  const categories = useSelector(showCategory);
+
+  useEffect(() => {
+    dispatch(getCategoryAsync());
+  }, []);
+
   return (
     <div className="w-full px-[30px] border">
       <div className="w-full flex flex-col lg:flex-row justify-between py-5 px-0 sm:px-[50px]">
@@ -9,7 +18,7 @@ const Footer = () => {
           <div className="text-[#B50000] text-[18px] font-semibold">
             Contact
           </div>
-          <div className="flex items-start text-left mt-3 sm:mt-[37px]">
+          <div className="flex items-start text-left mt-3 sm:mt-[15px]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -60,23 +69,23 @@ const Footer = () => {
           <div className="text-[#B50000] text-[18px] font-semibold">
             Site Map
           </div>
-          <ul className="w-full items-center mt-3 sm:mt-[37px]">
-            <li className="mb-4">
+          <ul className="w-full items-center mt-3 sm:mt-[15px]">
+            <li className="mb-2">
               <Link to="/" className=" hover:underline">
                 Home
               </Link>
             </li>
-            <li className="mb-4">
+            <li className="mb-2">
               <Link to="/balloons" className=" hover:underline">
                 Balloons
               </Link>
             </li>
-            <li className="mb-4">
+            <li className="mb-2">
               <Link to="/category" className=" hover:underline">
                 Category
               </Link>
             </li>
-            <li className="mb-4">
+            <li className="mb-2">
               <Link to="/about" className=" hover:underline">
                 About Us
               </Link>
@@ -92,37 +101,22 @@ const Footer = () => {
           <div className="text-[#B50000] text-[18px] font-semibold">
             Category
           </div>
-          <ul className="w-full items-center mt-3 sm:mt-[37px]">
-            <li className="mb-4">
-              <Link to="/category/foil" className=" hover:underline">
-                Foil Balloons
-              </Link>
-            </li>
-            <li className="mb-4">
-              <Link to="/category" className=" hover:underline">
-                Latex Balloons
-              </Link>
-            </li>
-            <li className="mb-4">
-              <Link to="/category" className=" hover:underline">
-                GEMS Balloons
-              </Link>
-            </li>
-            <li className="mb-4">
-              <Link to="/category" className=" hover:underline">
-                Bubble Balloons
-              </Link>
-            </li>
-            <li className="">
-              <Link to="/category" className=" hover:underline">
-                Plastic Balloons
-              </Link>
-            </li>
+          <ul className="w-full items-center mt-3 sm:mt-[15px]">
+            {categories &&
+              categories.slice(0, 5).map((category, ind) => (
+                <li className="mb-2" key={ind}>
+                  <Link to={`/balloons/${category?.name}`}>
+                    <div className="hover:underline">{category?.name}</div>
+                  </Link>
+                </li>
+              ))}
           </ul>
         </div>
         <div className="w-full lg:4/1 text-start px-0 sm:px-[30px] mt-5 sm:mt-0">
-          <div className="text-[#B50000] text-[18px] font-semibold">Follow</div>
-          <div className="mt-3 sm:mt-[37px]">
+          <div className="hidden sm:block text-[#B50000] text-[18px] font-semibold">
+            Follow
+          </div>
+          <div className="mt-3 sm:mt-[15px]">
             <div className="flex items-center mb-5">
               <img
                 src="/assets/img/facebook.png"

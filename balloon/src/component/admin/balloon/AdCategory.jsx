@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { showCategory, getCategoryAsync } from "../../../app/categorySlice";
 import { Toaster } from "react-hot-toast";
 import classNames from "classnames";
+import axios from "axios";
+import notify from "../../../utils/notify";
 import Layout from "../layout/AdLayout";
 import AdAddCategory from "./AdAddCategory";
 import AdRemoveCategory from "./AdRemoveCategory";
@@ -12,7 +14,8 @@ const AdCategory = () => {
   const categoryies = useSelector(showCategory);
 
   const [category, setCategory] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categoryName, setCategoryName] = useState("");
   const [showModal, setShowModal] = useState("none");
   const [errors, setErrors] = useState({});
 
@@ -37,13 +40,34 @@ const AdCategory = () => {
     document.body.style.overflow = "auto";
   };
 
-  const displayInfo = (e) => {
+  const displayInfo = (e, name) => {
     setSelectedCategory(e.target.getAttribute("category-key"));
-    // dispatch(getBookingSettingAsync(e.target.getAttribute("category-key")));
+    setCategoryName(name);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    const newSetting = {
+      categoryId: selectedCategory,
+      category: categoryName,
+    };
+
+    axios
+      .post(
+        process.env.REACT_APP_API_BASE_URL + "api/product/edit_category",
+        newSetting
+      )
+      .then((res) => {
+        console.log("res", res);
+        notify("You updated settings successfully!", 1);
+        setErrors({});
+        dispatch(getCategoryAsync());
+      })
+      .catch((err) => {
+        notify("Something went wrong!", 0);
+        setErrors(err.response.data);
+      });
   };
 
   return (
@@ -72,7 +96,7 @@ const AdCategory = () => {
                 <button
                   className="w-full py-2"
                   category-key={item._id}
-                  onClick={(e) => displayInfo(e)}
+                  onClick={(e) => displayInfo(e, item.name)}
                 >
                   {item.name}
                 </button>
@@ -116,9 +140,15 @@ const AdCategory = () => {
               type="text"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               min="0"
-              value={category.name}
-              onChange={(e) => setCategory(e.target.value)}
+              value={categoryName}
+              onChange={(e) => setCategoryName(e.target.value)}
             />
+            {errors.category && (
+              <p className="mt-2 text-xs text-red-600 dark:text-red-500">
+                <span className="font-medium">Oh, snapp!</span>{" "}
+                {errors.category}
+              </p>
+            )}
           </div>
           <div className="flex flex-col sm:flex-row">
             <button
@@ -169,7 +199,15 @@ const AdCategory = () => {
         </div>
       </div>
       <AdAddCategory show={showModal} closeModal={closeModal} />
-      <AdRemoveCategory show={showModal} closeModal={closeModal} />
+      <AdRemoveCategory
+        show={showModal}
+        selectedCategory={selectedCategory}
+        clearSelectedCategory={(e) => {
+          setSelectedCategory("");
+          setCategoryName("");
+        }}
+        closeModal={closeModal}
+      />
       <div
         className="absolute w-full h-[100%] bg-[#010101] bg-opacity-80 z-[50] left-0 top-0"
         style={{ display: showModal === "none" ? "none" : "block" }}

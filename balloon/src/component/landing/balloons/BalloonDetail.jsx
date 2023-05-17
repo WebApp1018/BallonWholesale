@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  showProductByCode,
+  showProductByCategory,
+  getProdcutByCategoryAsync,
+  getProdcutByCodeAsync,
+} from "../../../app/productSlice";
 import Topbar from "../layout/Topbar";
 import Footer from "../layout/Footer";
 import { Link } from "react-router-dom";
 
 const BalloonDetail = () => {
+  const dispatch = useDispatch();
+
+  const product = useSelector(showProductByCode);
+  const productByCategory = useSelector(showProductByCategory);
+  const { code } = useParams();
+
+  useEffect(() => {
+    dispatch(getProdcutByCodeAsync(code));
+  }, []);
+
+  useEffect(() => {
+    dispatch(getProdcutByCodeAsync(code));
+  }, [code]);
+
+  useEffect(() => {
+    if (product) {
+      dispatch(getProdcutByCategoryAsync(product.category));
+    }
+  }, [product]);
+
   return (
     <div>
       <Topbar />
@@ -11,13 +39,13 @@ const BalloonDetail = () => {
         <div className="w-full bg-[#007dc5] flex items-center py-5 pl-[15px] sm:pl-[100px]">
           <div className="text-white font-bold text-[25px] my-auto">
             <div className="text-start text-[20px] sm:text-[25px] mb-3">
-              Birthday Boy Cake & Candles
+              Product Details
             </div>
             <nav className="flex" aria-label="Breadcrumb">
               <ol className="flex flex-col sm:flex-row items-start sm:items-center space-x-1 md:space-x-3">
                 <li className="inline-flex items-center">
                   <Link
-                    to="#"
+                    to="/"
                     className="inline-flex items-center text-sm font-medium hover:underline"
                   >
                     <svg
@@ -48,7 +76,7 @@ const BalloonDetail = () => {
                       ></path>
                     </svg>
                     <Link
-                      to="#"
+                      to="/balloons/all"
                       className="ml-1 text-sm font-medium hover:underline md:ml-2"
                     >
                       Category
@@ -71,7 +99,7 @@ const BalloonDetail = () => {
                       ></path>
                     </svg>
                     <span className="ml-1 text-sm font-medium md:ml-2">
-                      Birthday Boy Cake & Candles
+                      Product
                     </span>
                   </div>
                 </li>
@@ -80,51 +108,37 @@ const BalloonDetail = () => {
           </div>
         </div>
         <div className="w-full flex flex-col sm:flex-row px-[15px] sm:px-[100px] mt-[50px]">
-          <div className="w-full sm:w-1/2 mb-10 sm:mb-0">
-            <img src="/assets/img/product.png" alt="" />
+          <div className="w-full sm:w-1/2 mb-10 sm:mb-0 px-5">
+            <img src={`/assets/img/products/${product?.image}`} alt="" />
           </div>
-          <div className="w-full sm:w-1/2 text-center sm:text-start">
+          <div className="w-full sm:w-1/2 text-center sm:text-start sm:px-5">
             <div className="text-[20px] font-bold mb-5">
-              Birthday Boy Cake & Candles
+              {product?.name} ({product?.code})
             </div>
-            <div>
-              Size and shape: Air-Fill Special Shapes Size and shape: Air-Fill
-              Special Shapes Size and shape: Air-Fill Special Shapes Size and
-              shape: Air-Fill Special Shapes Size and shape: Air-Fill Special
-              Shapes Size and shape: Air-Fill Special Shapes Size and shape:
-              Air-Fill Special Shapes Size and shape: Air-Fill Special Shapes
-              Size and shape: Air-Fill Special Shapes Size and shape: Air-Fill
-              Special Shapes
-            </div>
+            <div>{product?.detail}</div>
             <div>
               <div className="font-semibold text-[17px] my-5">
                 Related Products
               </div>
-              <div className="w-full flex flex-wrap text-center">
-                <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                  <img
-                    src="/assets/img/balloons3.png"
-                    className="px-3 py-2"
-                    alt=""
-                  />
-                  <div className="mt-3 mb-5">Balloons1</div>
-                </div>
-                <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                  <img
-                    src="/assets/img/balloons4.png"
-                    className="px-3 py-2"
-                    alt=""
-                  />
-                  <div className="mt-3 mb-5">Balloons1</div>
-                </div>
-                <div className="w-[130px] sm:w-[190px] border shadow-md hover:shadow-xl rounded-lg m-0 mr-2 sm:mr-4 mb-2 sm:mb-4 bg-white">
-                  <img
-                    src="/assets/img/balloons5.png"
-                    className="px-3 py-2"
-                    alt=""
-                  />
-                  <div className="mt-3 mb-5">Balloons1</div>
-                </div>
+              <div className="w-full flex flex-wrap justify-between text-center">
+                {productByCategory &&
+                  productByCategory.slice(0, 5).map((item, ind) =>
+                    product?.code !== item.code ? (
+                      <div
+                        key={ind}
+                        className="border rounded-lg shadow-lg flex-0 flex-shrink-1 mr-4 mb-4 basis-[43.5%] lg:basis-[30%] bg-white"
+                      >
+                        <Link to={`/balloon/detail/${item?.code}`}>
+                          <img
+                            src={`/assets/img/products/${item?.image}`}
+                            className="px-3 py-2"
+                            alt=""
+                          />
+                          <div className="mt-3 mb-5">{item?.name}</div>
+                        </Link>
+                      </div>
+                    ) : null
+                  )}
               </div>
             </div>
           </div>

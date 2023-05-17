@@ -22,11 +22,12 @@ function App() {
           path='/'
           element={<Home />} />
         <Route
-          path='/balloons'
+          path='/balloons/:category_name'
           element={<Balloons />} />
         <Route
-          path='/balloon/detail'
-          element={<BalloonDetail />} />
+          path='/balloon/detail/:code'
+          element={<BalloonDetail />}
+        />
         <Route
           path='/admin'
           element={

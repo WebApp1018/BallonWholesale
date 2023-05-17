@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // Schema creation
 const productSchema = new Schema({
+  code: {
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true
