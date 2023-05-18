@@ -93,15 +93,18 @@ router.post("/login", (req, res) => {
   //   });
   // });
 
-  const payload = { id: 123, email: 'admin' };
-        // Sign Token
-        jwt.sign(
-          payload,
-          configVars.JWT_SECRET,
-          { expiresIn: "1h" },
-          (err, token) => {
-            return res.json({ success: true, token: "Bearer " + token });
-          })
+  if(email === 'admin' && password === '123456') {
+    const payload = { id: 123, email: 'admin' };
+    // Sign Token
+    jwt.sign(
+      payload,
+      configVars.JWT_SECRET,
+      { expiresIn: "1h" },
+      (err, token) => {
+        return res.json({ success: true, token: "Bearer " + token });
+      })
+  }
+  
 });
 
 module.exports = router;

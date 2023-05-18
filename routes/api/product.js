@@ -17,7 +17,7 @@ const validateAddProductInput = require("../../validation/validateAddProductInpu
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'balloon/public/assets/img/products')
+    cb(null, 'upload/products')
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
