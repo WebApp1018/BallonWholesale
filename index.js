@@ -31,15 +31,19 @@ mongoose
   .then(() => console.log("MongoDB connected!"))
   .catch(err => console.log(err));
 
-// Test api
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
 // Use routes
 app.use("/api/auth", auth);
 app.use("/api/product", product);
 
+// Serve static files from the 'build' folder
+app.use(express.static(path.join(__dirname, 'balloon/build')));
+
+// Handle other requests by serving the index.html file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'balloon/build/index.html'));
+});
+
+// Start the server
 app.listen(port, () => {
   console.log(`Balloon app listening at http://localhost:${port}`);
 });

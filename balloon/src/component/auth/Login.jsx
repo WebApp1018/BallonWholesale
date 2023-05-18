@@ -67,7 +67,7 @@ const Login = () => {
                       htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900"
                     >
-                      Your email
+                      User name or email
                     </label>
                     <input
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5"
