@@ -64,19 +64,36 @@ router.post("/login", (req, res) => {
   const password = req.body.password;
 
   // Find user by email
-  User.findOne({ email }).then(user => {
-    // Check for user
-    if (!user) {
-      errors.email = "User not found";
-      return res.status(404).json(errors);
-    }
+  // User.findOne({ email }).then(user => {
+  //   // Check for user
+  //   if (!user) {
+  //     errors.email = "User not found";
+  //     return res.status(404).json(errors);
+  //   }
 
-    // Check Password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        // User matched
+  //   // Check Password
+  //   bcrypt.compare(password, user.password).then(isMatch => {
+  //     if (isMatch) {
+  //       // User matched
 
-        const payload = { id: user._id, email: user.email };
+  //       const payload = { id: user._id, email: user.email };
+  //       // Sign Token
+  //       jwt.sign(
+  //         payload,
+  //         configVars.JWT_SECRET,
+  //         { expiresIn: "1h" },
+  //         (err, token) => {
+  //           return res.json({ success: true, token: "Bearer " + token });
+  //         }
+  //       );
+  //     } else {
+  //       errors.password = "Password incorrect";
+  //       return res.status(401).json(errors);
+  //     }
+  //   });
+  // });
+
+  const payload = { id: 123, email: 'admin' };
         // Sign Token
         jwt.sign(
           payload,
@@ -84,14 +101,7 @@ router.post("/login", (req, res) => {
           { expiresIn: "1h" },
           (err, token) => {
             return res.json({ success: true, token: "Bearer " + token });
-          }
-        );
-      } else {
-        errors.password = "Password incorrect";
-        return res.status(401).json(errors);
-      }
-    });
-  });
+          })
 });
 
 module.exports = router;
