@@ -45,5 +45,5 @@ app.get('*', (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Balloon app listening at http://localhost:${port}`);
+  console.log(`Balloon app listening at http://149.100.159.216:${port}`);
 });
