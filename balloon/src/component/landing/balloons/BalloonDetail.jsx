@@ -109,7 +109,7 @@ const BalloonDetail = () => {
         </div>
         <div className="w-full flex flex-col sm:flex-row px-[15px] sm:px-[100px] mt-[50px]">
           <div className="w-full sm:w-1/2 mb-10 sm:mb-0 px-5">
-            <img src={`${process.env.REACT_APP_API_BASE_URL}upload/products/${product?.image}`} alt="" />
+            <img src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image}`} alt="" />
           </div>
           <div className="w-full sm:w-1/2 text-center sm:text-start sm:px-5">
             <div className="text-[20px] font-bold mb-5">
@@ -130,7 +130,7 @@ const BalloonDetail = () => {
                       >
                         <Link to={`/balloon/detail/${item?.code}`}>
                           <img
-                            src={`${process.env.REACT_APP_API_BASE_URL}upload/products/${item?.image}`}
+                            src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${item?.image}`}
                             className="px-3 py-2"
                             alt=""
                           />

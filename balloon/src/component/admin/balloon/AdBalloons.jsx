@@ -87,7 +87,7 @@ const AdBalloons = () => {
   const imageBodyTemplate = (rowData) => {
     return (
       <img
-        src={`${process.env.REACT_APP_API_BASE_URL}upload/products/${rowData.image}`}
+        src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${rowData.image}`}
         alt={rowData.image}
         className="shadow-2 border-round"
         style={{ width: "64px" }}

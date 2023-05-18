@@ -73,7 +73,7 @@ const Home = () => {
                   >
                     <Link to={`/balloon/detail/${product?.code}`}>
                       <img
-                        src={`${process.env.REACT_APP_API_BASE_URL}upload/products/${product?.image}`}
+                        src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image}`}
                         className="object-contain w-full h-auto"
                         alt=""
                       />
@@ -123,7 +123,7 @@ const Home = () => {
                 >
                   <Link to={`/balloon/detail/${product?.code}`}>
                     <img
-                      src={`${process.env.REACT_APP_API_BASE_URL}upload/products/${product?.image}`}
+                      src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image}`}
                       className="object-contain w-full h-auto"
                       alt=""
                     />

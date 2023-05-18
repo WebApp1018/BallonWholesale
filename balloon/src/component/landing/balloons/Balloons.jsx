@@ -164,7 +164,7 @@ const Balloons = () => {
                   >
                     <Link to={`/balloon/detail/${product?.code}`}>
                       <img
-                        src={`${process.env.REACT_APP_API_BASE_URL}upload/products/${product?.image}`}
+                        src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image}`}
                         className="px-3 py-2"
                         alt=""
                       />
