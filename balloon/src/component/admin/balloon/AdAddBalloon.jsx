@@ -41,7 +41,6 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
         success(1);
         closeModal();
         setProduct("");
-        setSelectedCategory("");
         setImage(null);
         dispatch(getProdcutAsync());
       })
