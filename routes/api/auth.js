@@ -21,16 +21,14 @@ router.get("/test", (req, res) => res.status(200).json({ msg: "Auth Works!" }));
 //@desc     Resigter auth route
 //@access   Public
 router.post("/register", (req, res) => {
-
-  User.findOne({ email: req.body.email }).then(user => {
-
+  User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       errors.email = "Email already exists";
       return res.status(409).json(errors);
     } else {
       const newUser = new User({
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -39,10 +37,10 @@ router.post("/register", (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then(user => {
+            .then((user) => {
               res.status(201).json(user);
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
         });
       });
     }
@@ -93,8 +91,8 @@ router.post("/login", (req, res) => {
   //   });
   // });
 
-  if(email === 'admin' && password === '123456') {
-    const payload = { id: 123, email: 'admin' };
+  if (email === "admin" && password === "123456") {
+    const payload = { id: 123, email: "admin" };
     // Sign Token
     jwt.sign(
       payload,
@@ -102,9 +100,9 @@ router.post("/login", (req, res) => {
       { expiresIn: "1h" },
       (err, token) => {
         return res.json({ success: true, token: "Bearer " + token });
-      })
+      }
+    );
   }
-  
 });
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getProdcutAsync } from "../../../app/productSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,12 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
   const [detail, setDetail] = useState("");
   const [image, setImage] = useState();
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (categories) {
+      setSelectedCategory(categories[0].name);
+    }
+  }, [categories]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -108,7 +114,6 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
                 className="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                 onChange={(e) => setSelectedCategory(e.target.value)}
               >
-                <option value="">Choose a category</option>
                 {categories
                   ? categories.map((item, ind) => (
                       <option value={item.name} key={ind}>
