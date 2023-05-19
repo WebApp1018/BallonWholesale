@@ -13,7 +13,9 @@ import Footer from "../layout/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const products = useSelector(showProduct);
+  const productsData = useSelector(showProduct);
+
+  const [products, setProducts] = useState([]);
   const productByCategory = useSelector(showProductByCategory);
   const categories = useSelector(showCategory);
 
@@ -22,6 +24,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getProdcutAsync());
     dispatch(getCategoryAsync());
+    console.log(products);
   }, []);
 
   useEffect(() => {
@@ -29,6 +32,12 @@ const Home = () => {
       dispatch(getProdcutByCategoryAsync(categories[0].name));
     }
   }, [categories]);
+
+  useEffect(() => {
+    if (productsData) {
+      setProducts(productsData);
+    }
+  }, [productsData]);
 
   const displayProduct = (category) => {
     setSelectedCategory(category);
@@ -64,8 +73,9 @@ const Home = () => {
           <div className="flex flex-wrap justify-between mr-[-1rem] mt-5">
             {products &&
               products
+                .filter((product) => product.code)
+                .sort((a, b) => b.code.localeCompare(a.code))
                 .slice(0, 5)
-                .reverse()
                 .map((product, ind) => (
                   <div
                     key={ind}
