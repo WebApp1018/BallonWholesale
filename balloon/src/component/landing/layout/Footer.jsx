@@ -7,6 +7,8 @@ const Footer = () => {
   const dispatch = useDispatch();
   const categories = useSelector(showCategory);
 
+  const currentYear = new Date().getFullYear();
+
   useEffect(() => {
     dispatch(getCategoryAsync());
   }, []);
@@ -23,7 +25,7 @@ const Footer = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-7 h-7 mr-2 text-[#B50000]"
+              className="w-9 h-9 mr-2 text-[#B50000]"
             >
               <path
                 fillRule="evenodd"
@@ -31,9 +33,11 @@ const Footer = () => {
                 clipRule="evenodd"
               />
             </svg>
-            <div>5000 E. 29th St. North Wichita, KS 67220-2111 USA</div>
+            <div>
+              Al Muroor Rd Building Nr 6. Next To Al Mandoos - Abu Dhabi
+            </div>
           </div>
-          <div className="flex items-start text-left mt-5">
+          <div className="flex items-center text-left mt-5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -47,22 +51,22 @@ const Footer = () => {
               />
             </svg>
             <div>
-              <Link to="tel:0123 456 999" className="underline">
-                (084) 0123 456 999
+              <Link to="tel:+971 50 733 2508" className="underline">
+                +971 50 733 2508
               </Link>
             </div>
           </div>
-          <div className="flex items-start text-left mt-5">
+          <div className="flex items-center text-left mt-5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-6 h-6 mr-2 text-[#B50000]"
+              className="w-4 h-4 mr-2 text-[#B50000]"
             >
               <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
               <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
             </svg>
-            <div>5000 E. 29th St. North Wichita, KS 67220-2111 USA</div>
+            <div>Balloreem@hotmail.com</div>
           </div>
         </div>
         <div className="w-full lg:4/1 text-start px-0 sm:px-[30px] mt-5 sm:mt-0">
@@ -118,35 +122,29 @@ const Footer = () => {
           </div>
           <div className="mt-3 sm:mt-[15px]">
             <div className="flex items-center mb-5">
-              <img
-                src="/assets/img/facebook.png"
-                className="w-[30px] mr-2"
-                alt=""
-              />
-              <img
-                src="/assets/img/instagrum.png"
-                className="w-[30px] mr-2"
-                alt=""
-              />
-              <img
-                src="/assets/img/tictok.png"
-                className="w-[30px] mr-2"
-                alt=""
-              />
-              <img
-                src="/assets/img/twitter.png"
-                className="w-[30px] mr-2"
-                alt=""
-              />
+              <Link to="https://www.facebook.com/Balloreem/">
+                <img
+                  src="/assets/img/facebook.png"
+                  className="w-[30px] mr-2"
+                  alt=""
+                />
+              </Link>
+              <Link to="https://www.instagram.com/balloreem/">
+                <img
+                  src="/assets/img/instagrum.png"
+                  className="w-[30px] mr-2"
+                  alt=""
+                />
+              </Link>
             </div>
             <img src="/assets/img/ICON.png" className="w-[100px]" alt="" />
           </div>
         </div>
       </div>
       <div className="w-full text-center text-[#404040] border-t-2 border-[#c9c8c8] py-5">
-        Copyright © 2023{" "}
+        Copyright © {currentYear}{" "}
         <Link to="/" className="font-bold">
-          Balloon.
+          Balloreem.
         </Link>{" "}
         All rights reserved.
       </div>

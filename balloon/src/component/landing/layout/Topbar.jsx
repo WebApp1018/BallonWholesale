@@ -68,10 +68,13 @@ const Topbar = () => {
           </li>
         </ul>
       </div>
-      <div className="mr-[50px] text-[#404040] hidden lg:block">
-        <div className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]">
+      <div className="mr-[50px] hidden lg:block">
+        <Link
+          to="/how_to_buy"
+          className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
+        >
           How To Buy?
-        </div>
+        </Link>
       </div>
       <div
         className="flex justify-between items-center text-[#404040] lg:hidden mr-[25px] sm:mr-[50px]"

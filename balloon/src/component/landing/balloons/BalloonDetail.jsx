@@ -109,7 +109,10 @@ const BalloonDetail = () => {
         </div>
         <div className="w-full flex flex-col sm:flex-row px-[15px] sm:px-[100px] mt-[50px]">
           <div className="w-full sm:w-1/2 mb-10 sm:mb-0 px-5">
-            <img src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image}`} alt="" />
+            <img
+              src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image}`}
+              alt=""
+            />
           </div>
           <div className="w-full sm:w-1/2 text-center sm:text-start sm:px-5">
             <div className="text-[20px] font-bold mb-5">
@@ -141,6 +144,12 @@ const BalloonDetail = () => {
                   )}
               </div>
             </div>
+            <Link
+              to="/how_to_buy"
+              className="block py-2 pl-3 pr-4 underline text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
+            >
+              How To Buy?
+            </Link>
           </div>
         </div>
       </div>

@@ -106,7 +106,7 @@ const Home = () => {
               categories.map((category, ind) => (
                 <div
                   key={ind}
-                  className="w-[80px] h-[50px] rounded-t-md relative overflow-hidden hover:cursor-pointer"
+                  className="w-[100px] h-[50px] rounded-t-md relative overflow-hidden hover:cursor-pointer"
                 >
                   <div
                     className={`absolute inset-0 flex items-center justify-center 
