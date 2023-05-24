@@ -11,9 +11,7 @@ const Contact = () => {
         <div className="w-full h-[100px] bg-[#007dc5] flex items-center pl-[100px]">
           <div className="text-white font-bold text-[25px] my-auto">
             {/* Contact Us */}
-            Let's contact on my skype for more flexible and private
-            communication. My skype: live:.cid.eb5445208f8db7f7 Don't mention
-            this on Freelancer, If you don't want my account be closed. LOL.
+            Add me on the skype. My skype: live:.cid.eb5445208f8db7f7
           </div>
         </div>
         <div className="w-full mt-[50px] px-[15px] sm:px-[100px]">
