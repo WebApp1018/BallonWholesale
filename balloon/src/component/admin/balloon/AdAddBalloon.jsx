@@ -9,7 +9,7 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [product, setProduct] = useState("");
   const [detail, setDetail] = useState("");
-  const [image, setImage] = useState();
+  const [images, setImages] = useState([]);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -25,7 +25,9 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
     formData.append("product", product);
     formData.append("category", selectedCategory);
     formData.append("detail", detail);
-    formData.append("image", image);
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
 
     axios
       .post(
@@ -41,11 +43,11 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
         success(1);
         closeModal();
         setProduct("");
-        setImage(null);
+        setImages([]);
         dispatch(getProdcutAsync());
       })
       .catch((err) => {
-        setErrors(err.response.data);
+        setErrors("Something went wrong!");
       });
   };
 
@@ -153,9 +155,12 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
                 Product Image
               </label>
               <input
-                className="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
                 type="file"
-                onChange={(e) => setImage(e.target.files[0])}
+                multiple
+                onChange={(e) => {
+                  setImages(e.target.files);
+                }}
               />
             </div>
             <div className="w-full text-center">

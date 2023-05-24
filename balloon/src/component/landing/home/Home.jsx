@@ -81,9 +81,12 @@ const Home = () => {
                     key={ind}
                     className="border rounded-lg shadow-lg flex-0 flex-shrink-1 mr-4 mb-4 basis-[43.5%] lg:basis-[18.6%]"
                   >
-                    <Link to={`/balloon/detail/${product?.code}`}>
+                    <Link
+                      to={`/balloon/detail/${product?.code}`}
+                      className="w-full h-full flex flex-col justify-between"
+                    >
                       <img
-                        src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image}`}
+                        src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image[0]}`}
                         className="object-contain w-full h-auto"
                         alt=""
                       />
@@ -131,9 +134,12 @@ const Home = () => {
                   key={ind}
                   className="border rounded-lg shadow-lg flex-0 flex-shrink-1 mr-4 mb-4 basis-[43.5%] lg:basis-[18.6%]"
                 >
-                  <Link to={`/balloon/detail/${product?.code}`}>
+                  <Link
+                    to={`/balloon/detail/${product?.code}`}
+                    className="w-full h-full flex flex-col justify-between"
+                  >
                     <img
-                      src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image}`}
+                      src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image[0]}`}
                       className="object-contain w-full h-auto"
                       alt=""
                     />

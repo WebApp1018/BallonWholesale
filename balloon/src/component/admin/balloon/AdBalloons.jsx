@@ -86,12 +86,23 @@ const AdBalloons = () => {
 
   const imageBodyTemplate = (rowData) => {
     return (
-      <img
-        src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${rowData.image}`}
-        alt={rowData.image}
-        className="shadow-2 border-round"
-        style={{ width: "64px" }}
-      />
+      <div class="flex -space-x-4">
+        {rowData.image.slice(0, 3).map((item, ind) => {
+          return (
+            <img
+              key={ind}
+              className="w-16 h-16 border-2 border-white rounded-full"
+              src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${item}`}
+              alt=""
+            />
+          );
+        })}
+        {rowData.image.length > 3 ? (
+          <div className="flex items-center justify-center w-16 h-16 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600">
+            +{rowData.image.length - 3}
+          </div>
+        ) : null}
+      </div>
     );
   };
 

@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import {
   showProductByCode,
@@ -9,7 +11,18 @@ import {
 } from "../../../app/productSlice";
 import Topbar from "../layout/Topbar";
 import Footer from "../layout/Footer";
-import { Link } from "react-router-dom";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import "./swiper.css";
+
+// import Swiper modules
+import { FreeMode, Navigation, Thumbs } from "swiper";
 
 const BalloonDetail = () => {
   const dispatch = useDispatch();
@@ -17,6 +30,7 @@ const BalloonDetail = () => {
   const product = useSelector(showProductByCode);
   const productByCategory = useSelector(showProductByCategory);
   const { code } = useParams();
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   useEffect(() => {
     dispatch(getProdcutByCodeAsync(code));
@@ -108,11 +122,70 @@ const BalloonDetail = () => {
           </div>
         </div>
         <div className="w-full flex flex-col sm:flex-row px-[15px] sm:px-[100px] mt-[50px]">
-          <div className="w-full sm:w-1/2 mb-10 sm:mb-0 px-5">
-            <img
-              src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image}`}
-              alt=""
-            />
+          <div className="w-full sm:w-1/2 mb-10 sm:mb-0 px-5 sm:px-10">
+            <div
+              className={classNames({
+                show: product?.image?.length > 1,
+                hidden: product?.image?.length < 2,
+              })}
+            >
+              <Swiper
+                style={{
+                  "--swiper-navigation-color": "#fff",
+                  "--swiper-pagination-color": "#fff",
+                }}
+                loop={true}
+                spaceBetween={10}
+                navigation={true}
+                thumbs={{ swiper: thumbsSwiper }}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiper2"
+              >
+                {product?.image?.map((item, ind) => {
+                  return (
+                    <SwiperSlide key={ind}>
+                      <img
+                        src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${item}`}
+                        className="w-[300px] h-fit"
+                        alt=""
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
+              <Swiper
+                onSwiper={setThumbsSwiper}
+                loop={true}
+                spaceBetween={10}
+                slidesPerView={4}
+                freeMode={true}
+                watchSlidesProgress={true}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiper"
+              >
+                {product?.image?.map((item, ind) => {
+                  return (
+                    <SwiperSlide key={`thum_${ind}`}>
+                      <img
+                        src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${item}`}
+                        alt=""
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
+            </div>
+            <div
+              className={classNames({
+                hidden: product?.image?.length > 1,
+                show: product?.image?.length < 2,
+              })}
+            >
+              <img
+                src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image[0]}`}
+                alt=""
+              />
+            </div>
           </div>
           <div className="w-full sm:w-1/2 text-center sm:text-start sm:px-5">
             <div className="text-[20px] font-bold mb-5">
@@ -133,7 +206,7 @@ const BalloonDetail = () => {
                       >
                         <Link to={`/balloon/detail/${item?.code}`}>
                           <img
-                            src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${item?.image}`}
+                            src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${item?.image[0]}`}
                             className="px-3 py-2"
                             alt=""
                           />

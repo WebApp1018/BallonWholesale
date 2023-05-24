@@ -16,7 +16,7 @@ const AdEditBalloon = ({
   const [selectedCategory, setSelectedCategory] = useState("");
   const [product, setProduct] = useState("");
   const [detail, setDetail] = useState("");
-  const [image, setImage] = useState();
+  const [images, setImages] = useState([]);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -36,7 +36,9 @@ const AdEditBalloon = ({
     formData.append("product", product);
     formData.append("category", selectedCategory);
     formData.append("detail", detail);
-    formData.append("image", image);
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
 
     axios
       .post(
@@ -53,7 +55,7 @@ const AdEditBalloon = ({
         success(1);
         setProduct("");
         setSelectedCategory("");
-        setImage(null);
+        setImages([]);
         dispatch(getProdcutAsync());
       })
       .catch((err) => {
@@ -171,13 +173,11 @@ const AdEditBalloon = ({
               <input
                 className="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
                 type="file"
-                onChange={(e) => setImage(e.target.files[0])}
+                multiple
+                onChange={(e) => {
+                  setImages(e.target.files);
+                }}
               />
-              {errors.image && (
-                <p className="mt-2 text-xs text-red-600 text-start">
-                  <span className="font-medium">Oh, snapp!</span> {errors.image}
-                </p>
-              )}
             </div>
             <div className="w-full text-center">
               <button

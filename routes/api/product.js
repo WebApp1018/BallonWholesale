@@ -14,21 +14,23 @@ const Category = require("../../models/Category");
 const validateAddcategoryInput = require("../../validation/validateAddcategoryInput");
 const validateAddProductInput = require("../../validation/validateAddProductInput");
 
-const multer = require('multer');
+const multer = require("multer");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/upload')
+    cb(null, "public/upload");
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-})
-const upload = multer({ storage: storage })
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
 //@route    GET api/product/test
 //@desc     Tests auth route
 //@access   Public
-router.get("/test", (req, res) => res.status(200).json({ msg: "Product Works!" }));
+router.get("/test", (req, res) =>
+  res.status(200).json({ msg: "Product Works!" })
+);
 
 //@route    GET api/product
 //@desc     Get All products route
@@ -40,8 +42,7 @@ router.get(
     const errors = {};
 
     Product.find()
-      .then(product => {
-
+      .then((product) => {
         if (!product) {
           errors.noproduct = "There is no product.";
           return res.status(404).json(errors);
@@ -49,7 +50,7 @@ router.get(
 
         res.status(200).json(product);
       })
-      .catch(err => res.status(404).json(err));
+      .catch((err) => res.status(404).json(err));
   }
 );
 
@@ -62,10 +63,9 @@ router.get(
   (req, res) => {
     const errors = {};
 
-    if (req.params.category_name !== 'all') {
+    if (req.params.category_name !== "all") {
       Product.find({ category: req.params.category_name })
-        .then(product => {
-
+        .then((product) => {
           if (!product) {
             errors.noproduct = "There is no product.";
             return res.status(404).json(errors);
@@ -73,11 +73,10 @@ router.get(
 
           res.status(200).json(product);
         })
-        .catch(err => res.status(404).json(err));
+        .catch((err) => res.status(404).json(err));
     } else {
       Product.find()
-        .then(product => {
-
+        .then((product) => {
           if (!product) {
             errors.noproduct = "There is no product in this category.";
             return res.status(404).json(errors);
@@ -85,7 +84,7 @@ router.get(
 
           res.status(200).json(product);
         })
-        .catch(err => res.status(404).json(err));
+        .catch((err) => res.status(404).json(err));
     }
   }
 );
@@ -100,8 +99,7 @@ router.get(
     const errors = {};
 
     Product.findOne({ code: req.params.code })
-      .then(product => {
-
+      .then((product) => {
         if (!product) {
           errors.noproduct = "There is no product with this code.";
           return res.status(404).json(errors);
@@ -109,7 +107,7 @@ router.get(
 
         res.status(200).json(product);
       })
-      .catch(err => res.status(404).json(err));
+      .catch((err) => res.status(404).json(err));
   }
 );
 
@@ -123,7 +121,7 @@ router.get(
     const errors = {};
 
     Category.find()
-      .then(category => {
+      .then((category) => {
         if (!category) {
           errors.nocategory = "There is no category.";
           return res.status(404).json(errors);
@@ -131,14 +129,15 @@ router.get(
 
         res.status(200).json(category);
       })
-      .catch(err => res.status(404).json(err));
+      .catch((err) => res.status(404).json(err));
   }
 );
 
 //@route    POST api/product/add_category
 //@desc     Add new category
 //@access   Private
-router.post("/add_category",
+router.post(
+  "/add_category",
   // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateAddcategoryInput(req.body);
@@ -149,8 +148,7 @@ router.post("/add_category",
       return res.status(400).json(errors);
     }
 
-    Category.findOne({ name: req.body.category }).then(category => {
-
+    Category.findOne({ name: req.body.category }).then((category) => {
       if (category) {
         errors.category = "Category already exists";
         return res.status(409).json(errors);
@@ -161,10 +159,10 @@ router.post("/add_category",
 
         newCategory
           .save()
-          .then(category => {
+          .then((category) => {
             res.status(201).json(category);
           })
-          .catch(err => console.log(err));
+          .catch((err) => console.log(err));
       }
     });
   }
@@ -173,7 +171,8 @@ router.post("/add_category",
 //@route    POST api/product/edit_category
 //@desc     Update category
 //@access   Private
-router.post("/edit_category",
+router.post(
+  "/edit_category",
   // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateAddcategoryInput(req.body);
@@ -189,18 +188,17 @@ router.post("/edit_category",
       {
         $set: {
           name: req.body.category,
-        }
+        },
       },
       { new: true } // Return the updated document
     )
-      .then(updatedCategory => {
+      .then((updatedCategory) => {
         res.status(200).json(updatedCategory);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-        res.status(500).send('Error updating category');
+        res.status(500).send("Error updating category");
       });
-
   }
 );
 
@@ -228,9 +226,10 @@ router.post("/remove_category", async (req, res) => {
 //@route    POST api/product/add_product
 //@desc     Add new product
 //@access   Private
-router.post("/add_product",
+router.post(
+  "/add_product",
   // passport.authenticate("jwt", { session: false }),
-  upload.single('image'),
+  upload.array("images", 10),
   (req, res) => {
     const { errors, isValid } = validateAddProductInput(req.body);
 
@@ -240,33 +239,41 @@ router.post("/add_product",
       return res.status(400).json(errors);
     }
 
-    Product.findOne({ name: req.body.product, category: req.body.category }).then(product => {
+    const imageArray = [];
+    for (let i = 0; i < req.files.length; i++) {
+      imageArray.push(req.files[i].filename);
+    }
 
+    Product.findOne({
+      name: req.body.product,
+      category: req.body.category,
+    }).then((product) => {
       if (product) {
         errors.product = "Product already exists";
         return res.status(409).json(errors);
       } else {
-        Product.findOne({}, 'code', { sort: { code: -1 } }).then(product => {
-          let maxCode = product ? product.code : '0000';
-          const newCodeNumber = parseInt(maxCode) >= 0 ? parseInt(maxCode) + 1 : 0;
-          const newCode = newCodeNumber.toString().padStart(4, '0');
+        Product.findOne({}, "code", { sort: { code: -1 } }).then((product) => {
+          let maxCode = product ? product.code : "0000";
+          const newCodeNumber =
+            parseInt(maxCode) >= 0 ? parseInt(maxCode) + 1 : 0;
+          const newCode = newCodeNumber.toString().padStart(4, "0");
 
-          const DEFAULT_IMAGE_URL = 'default-image.jpg';
+          const DEFAULT_IMAGE_URL = "default-image.jpg";
 
           const newProduct = new Product({
             code: newCode,
             name: req.body.product,
             category: req.body.category,
             detail: req.body.detail,
-            image: req.file ? req.file.filename : DEFAULT_IMAGE_URL
+            image: req.files ? imageArray : [DEFAULT_IMAGE_URL],
           });
 
           newProduct
             .save()
-            .then(product => {
+            .then((product) => {
               res.status(201).json(product);
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
         });
       }
     });
@@ -276,9 +283,10 @@ router.post("/add_product",
 //@route    POST api/product/edit_product
 //@desc     Update product
 //@access   Private
-router.post("/edit_product",
+router.post(
+  "/edit_product",
   // passport.authenticate("jwt", { session: false }),
-  upload.single('image'),
+  upload.array("images", 10),
   (req, res) => {
     const { errors, isValid } = validateAddcategoryInput(req.body);
 
@@ -292,29 +300,35 @@ router.post("/edit_product",
     let updateObject = {
       name: req.body.product,
       category: req.body.category,
-      detail: req.body.detail
+      detail: req.body.detail,
     };
 
     // Check if a file was uploaded or not
-    if (req.file) {
+    if (req.files) {
       // If a file was uploaded, add the image filename to the update object
-      updateObject.image = req.file.filename;
+
+      const imageArray = [];
+      for (let i = 0; i < req.files.length; i++) {
+        imageArray.push(req.files[i].filename);
+      }
+
+      updateObject.image = imageArray;
     }
 
     // Update the product with the specified ID with the update object
     Product.findOneAndUpdate(
       { _id: req.body.productId },
       {
-        $set: updateObject // Pass the update object as the second argument of findOneAndUpdate
+        $set: updateObject, // Pass the update object as the second argument of findOneAndUpdate
       },
       { new: true } // Return the updated document
     )
-      .then(updatedProduct => {
+      .then((updatedProduct) => {
         res.status(200).json(updatedProduct);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-        res.status(500).send('Error updating product');
+        res.status(500).send("Error updating product");
       });
   }
 );
