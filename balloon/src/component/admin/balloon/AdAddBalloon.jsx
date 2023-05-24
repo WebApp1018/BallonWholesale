@@ -14,7 +14,7 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
 
   useEffect(() => {
     if (categories) {
-      setSelectedCategory(categories[0].name);
+      setSelectedCategory(categories[0]?.name);
     }
   }, [categories]);
 
@@ -117,8 +117,8 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
               >
                 {categories
                   ? categories.map((item, ind) => (
-                      <option value={item.name} key={ind}>
-                        {item.name}
+                      <option value={item?.name} key={ind}>
+                        {item?.name}
                       </option>
                     ))
                   : null}

@@ -131,11 +131,11 @@ const AdEditBalloon = ({
                 {categories &&
                   categories.map((item, ind) => (
                     <option
-                      value={item.name}
+                      value={item?.name}
                       key={ind}
-                      selected={item.name === selectedCategory}
+                      selected={item?.name === selectedCategory}
                     >
-                      {item.name}
+                      {item?.name}
                     </option>
                   ))}
               </select>
