@@ -10,9 +10,7 @@ const Contact = () => {
       <div className="mb-[50px]">
         <div className="w-full h-[100px] bg-[#007dc5] flex items-center pl-[100px]">
           <div className="text-white font-bold text-[25px] my-auto">
-            {/* Contact Us */}
-            Add me on the skype. My skype: live:.cid.eb5445208f8db7f7, I will
-            remove this soon.
+            Contact Us
           </div>
         </div>
         <div className="w-full mt-[50px] px-[15px] sm:px-[100px]">
