@@ -229,7 +229,7 @@ router.post("/remove_category", async (req, res) => {
 router.post(
   "/add_product",
   // passport.authenticate("jwt", { session: false }),
-  upload.array("images", 10),
+  upload.array("images[]", 10),
   (req, res) => {
     const { errors, isValid } = validateAddProductInput(req.body);
 
