@@ -15,7 +15,7 @@ const Contact = () => {
         </div>
         <div className="w-full mt-[50px] px-[15px] sm:px-[100px]">
           <div className=" font-medium text-[18px]">
-            Have any question? We'd love to hear from you.
+            Have any questions? We'd love to hear from you.
           </div>
           <div className="w-full flex flex-col sm:flex-row mt-5">
             <div className="w-full h-[250px] sm:w-1/3 border shadow-lg rounded-lg px-5 py-5 mr-0 sm:mr-5 mb-5 sm:mb-0">
@@ -58,8 +58,8 @@ const Contact = () => {
               </svg>
               <div className="font-semibold text-[25px]">Call Us</div>
               <div className="mb-5">
-                Our support team is spread across the globe to give you answers
-                fast.
+                For any inquiries or assistance, please don't hesitate to call
+                us.
               </div>
               <Link
                 to="tel:+971 50 733 2508"
