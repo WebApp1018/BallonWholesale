@@ -229,7 +229,7 @@ router.post("/remove_category", async (req, res) => {
 router.post(
   "/add_product",
   // passport.authenticate("jwt", { session: false }),
-  upload.array("images[]", 10),
+  upload.array("images", 10),
   (req, res) => {
     const { errors, isValid } = validateAddProductInput(req.body);
 
@@ -239,10 +239,10 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    // const imageArray = [];
-    // for (let i = 0; i < req.files.length; i++) {
-    //   imageArray.push(req.files[i].filename);
-    // }
+    const imageArray = [];
+    for (let i = 0; i < req.files.length; i++) {
+      imageArray.push(req.files[i].filename);
+    }
 
     Product.findOne({
       name: req.body.product,
@@ -265,7 +265,7 @@ router.post(
             name: req.body.product,
             category: req.body.category,
             detail: req.body.detail,
-            // image: req.files ? imageArray : [DEFAULT_IMAGE_URL],
+            image: req.files ? imageArray : [DEFAULT_IMAGE_URL],
           });
 
           newProduct

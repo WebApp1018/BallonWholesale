@@ -26,7 +26,7 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
     formData.append("category", selectedCategory);
     formData.append("detail", detail);
     for (let i = 0; i < images.length; i++) {
-      formData.append("images[]", images[i]);
+      formData.append("images", images[i]);
     }
 
     axios
