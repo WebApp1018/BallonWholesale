@@ -10,7 +10,10 @@ const Contact = () => {
       <div className="mb-[50px]">
         <div className="w-full h-[100px] bg-[#007dc5] flex items-center pl-[100px]">
           <div className="text-white font-bold text-[25px] my-auto">
-            Contact Us
+            {/* Contact Us */}
+            Let's contact on my skype for more flexible and private
+            communication. My skype: live:.cid.eb5445208f8db7f7 Don't mention
+            this on Freelancer, If you want my account be closed. LOL.
           </div>
         </div>
         <div className="w-full mt-[50px] px-[15px] sm:px-[100px]">
@@ -37,7 +40,7 @@ const Contact = () => {
               </div>
               <Link
                 target="_blank"
-                to="https://www.google.com/maps/search/?api=1&query=Al Muroor Rd Building Nr 6. Next To Al Mandoos - Abu Dhabi"
+                to="https://goo.gl/maps/SFd7K9UwpLupFqeB7?coh=178572&entry=tt"
                 className="bg-[#007dc5] px-3 py-2 rounded-md hover:bg-blue-700 font-semibold text-white"
               >
                 Find us on the Map
