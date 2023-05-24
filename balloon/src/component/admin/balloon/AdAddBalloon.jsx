@@ -157,6 +157,7 @@ const AdAddBalloon = ({ categories, show, closeModal, success }) => {
               <input
                 class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
                 type="file"
+                name="images"
                 multiple
                 onChange={(e) => {
                   setImages(e.target.files);
