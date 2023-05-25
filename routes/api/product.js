@@ -312,7 +312,9 @@ router.post(
         imageArray.push(req.files[i].filename);
       }
 
-      updateObject.image = imageArray;
+      if (imageArray.length) {
+        updateObject.image = imageArray;
+      }
     }
 
     // Update the product with the specified ID with the update object
