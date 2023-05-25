@@ -122,14 +122,14 @@ const Footer = () => {
           </div>
           <div className="mt-3 sm:mt-[15px]">
             <div className="flex items-center mb-5">
-              <Link to="https://www.facebook.com/Balloreem/">
+              <Link to="https://www.facebook.com/Balloreem/" target="_blank">
                 <img
                   src="/assets/img/facebook.png"
                   className="w-[30px] mr-2"
                   alt=""
                 />
               </Link>
-              <Link to="https://www.instagram.com/balloreem/">
+              <Link to="https://www.instagram.com/balloreem/" target="_blank">
                 <img
                   src="/assets/img/instagrum.png"
                   className="w-[30px] mr-2"
