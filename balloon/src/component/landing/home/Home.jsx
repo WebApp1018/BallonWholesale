@@ -127,7 +127,7 @@ const Home = () => {
                 </div>
               ))}
           </div>
-          <div className="flex flex-wrap justify-between mr-[-1rem] mt-5">
+          <div className="flex flex-wrap justify-start mr-[-1rem] mt-5">
             {productByCategory &&
               productByCategory.slice(0, 10).map((product, ind) => (
                 <div

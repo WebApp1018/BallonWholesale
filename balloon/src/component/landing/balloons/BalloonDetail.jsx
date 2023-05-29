@@ -43,6 +43,7 @@ const BalloonDetail = () => {
   useEffect(() => {
     if (product) {
       dispatch(getProdcutByCategoryAsync(product.category));
+      document.getElementById("product-detail").innerHTML = product.detail;
     }
   }, [product]);
 
@@ -191,14 +192,14 @@ const BalloonDetail = () => {
             <div className="text-[20px] font-bold mb-5">
               {product?.name} ({product?.code})
             </div>
-            <div>{product?.detail}</div>
+            <div id="product-detail"></div>
             <div>
               <div className="font-semibold text-[17px] my-5">
                 Related Products
               </div>
               <div className="w-full flex flex-wrap justify-between text-center">
                 {productByCategory &&
-                  productByCategory.slice(0, 5).map((item, ind) =>
+                  productByCategory.slice(0, 4).map((item, ind) =>
                     product?.code !== item.code ? (
                       <div
                         key={ind}

@@ -44,14 +44,6 @@ const Topbar = () => {
           </li>
           <li className="mx-[57px]">
             <Link
-              to="/balloons/all"
-              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
-            >
-              Category
-            </Link>
-          </li>
-          <li className="mx-[57px]">
-            <Link
               to="/contact"
               className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
             >
@@ -64,6 +56,22 @@ const Topbar = () => {
               className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
             >
               About Us
+            </Link>
+          </li>
+          <li className="mx-[57px]">
+            <Link
+              to="/privacy"
+              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
+            >
+              Privacy & Policy
+            </Link>
+          </li>
+          <li className="mx-[57px]">
+            <Link
+              to="/terms"
+              className="block py-2 pl-3 pr-4 text-[#404040] md:hover:bg-transparent md:border-0 md:hover:text-[#007dc5]"
+            >
+              Terms & Conditions
             </Link>
           </li>
         </ul>
@@ -175,6 +183,22 @@ const Topbar = () => {
                 className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
               >
                 About Us
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/privacy"
+                className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
+              >
+                Privacy & Policy
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/terms"
+                className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
+              >
+                Terms & Conditions
               </Link>
             </li>
           </ul>

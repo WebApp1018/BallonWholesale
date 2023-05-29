@@ -15,9 +15,9 @@ const Contact = () => {
         </div>
         <div className="w-full mt-[50px] px-[15px] sm:px-[100px]">
           <div className=" font-medium text-[18px]">
-            Have any questions? We'd love to hear from you.
+            Have any question? We'd love to hear from you.
           </div>
-          <div className="w-full flex flex-col sm:flex-row mt-5">
+          <div className="w-full flex flex-col sm:flex-row mt-10">
             <div className="w-full h-[250px] sm:w-1/3 border shadow-lg rounded-lg px-5 py-5 mr-0 sm:mr-5 mb-5 sm:mb-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ const Contact = () => {
               </div>
               <Link
                 target="_blank"
-                to="https://goo.gl/maps/SFd7K9UwpLupFqeB7?coh=178572&entry=tt"
+                to="https://www.google.com/maps/search/?api=1&query=Al Muroor Rd Building Nr 6. Next To Al Mandoos - Abu Dhabi"
                 className="bg-[#007dc5] px-3 py-2 rounded-md hover:bg-blue-700 font-semibold text-white"
               >
                 Find us on the Map
@@ -58,8 +58,8 @@ const Contact = () => {
               </svg>
               <div className="font-semibold text-[25px]">Call Us</div>
               <div className="mb-5">
-                For any inquiries or assistance, please don't hesitate to call
-                us.
+                Our support team is spread across the globe to give you answers
+                fast.
               </div>
               <Link
                 to="tel:+971 50 733 2508"

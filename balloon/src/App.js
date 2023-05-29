@@ -8,6 +8,8 @@ import BalloonDetail from "./component/landing/balloons/BalloonDetail";
 import HowToBuy from "./component/landing/contact/HowToBuy";
 import About from "./component/landing/contact/About";
 import Contact from "./component/landing/contact/Contact";
+import Privacy from "./component/landing/contact/Privacy";
+import Terms from "./component/landing/contact/Terms";
 import AdDashboard from "./component/admin/dashboard/AdDashboard";
 import AdBalloons from "./component/admin/balloon/AdBalloons";
 import AdCategory from "./component/admin/balloon/AdCategory";

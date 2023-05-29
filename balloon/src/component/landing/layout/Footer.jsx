@@ -66,7 +66,11 @@ const Footer = () => {
               <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
               <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
             </svg>
-            <div>Balloreem@hotmail.com</div>
+            <div>
+              <Link to="mailto:Balloreem@hotmail.com" className="underline">
+                Balloreem@hotmail.com
+              </Link>
+            </div>
           </div>
         </div>
         <div className="w-full lg:4/1 text-start px-0 sm:px-[30px] mt-5 sm:mt-0">
@@ -85,18 +89,23 @@ const Footer = () => {
               </Link>
             </li>
             <li className="mb-2">
-              <Link to="/category" className=" hover:underline">
-                Category
-              </Link>
-            </li>
-            <li className="mb-2">
               <Link to="/about" className=" hover:underline">
                 About Us
               </Link>
             </li>
-            <li className="">
+            <li className="mb-2">
               <Link to="/contact" className=" hover:underline">
                 Contact Us
+              </Link>
+            </li>
+            <li className="mb-2">
+              <Link to="/privacy" className=" hover:underline">
+                Privacy & Policy
+              </Link>
+            </li>
+            <li className="">
+              <Link to="/terms" className=" hover:underline">
+                Terms & Conditions
               </Link>
             </li>
           </ul>
