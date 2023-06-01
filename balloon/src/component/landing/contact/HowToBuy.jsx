@@ -4,6 +4,7 @@ import Topbar from "../layout/Topbar";
 import Footer from "../layout/Footer";
 
 const HowToBuy = () => {
+  window.scrollTo(0, 0);
   return (
     <div>
       <Topbar />
@@ -13,40 +14,15 @@ const HowToBuy = () => {
             How To Buy?
           </div>
         </div>
-        <div className="w-full mt-[50px] px-[15px] sm:px-[100px]">
-          <div className="text-[18px]">
+        <div className="hidden sm:block mt-10 mx-6 lg:mx-[100px]">
+          <img src="assets/img/Banner-2.jpg" className="rounded-lg" alt="" />
+        </div>
+        <div className="w-full mt-[50px] px-[15px] sm:px-[100px] text-justify">
+          <div className="text-[18px] font-semibold text-center">
             Thank you for choosing Balloreem for your wholesale balloon needs.
             To make a purchase, simply follow the steps below:
           </div>
-          {/* <div className="w-full sm:w-[600px] mx-auto border shadow-lg rounded-lg mt-[50px] px-[25px] py-[30px]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="red"
-              className="w-16 h-16 mx-auto"
-            >
-              <path
-                fillRule="evenodd"
-                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <div className="font-bold text-[25px] mt-5">Contact Us</div>
-            <div className="mb-8 mt-2">
-              Need an expert to build a breathtaking birthday bouquet or design
-              dazzling decor for a corporate event? You’re one click closer with
-              Balloon Pro Finder. Our ever-expanding Qualatex Balloon Network
-              (QBN) of balloon professionals include Certified Balloon Artists
-              (CBA) as well, so you know you're getting the best.
-            </div>
-            <Link
-              to="/contact"
-              className="bg-[#007dc5] px-3 py-2 rounded-md hover:bg-blue-700 font-semibold text-white"
-            >
-              Contact Us
-            </Link>
-          </div> */}
-          <div className="text-start mt-10">
+          <div className="mt-10">
             <div className="text-[18px] font-semibold">
               Step 1: Browse Our Catalog
             </div>
@@ -59,7 +35,7 @@ const HowToBuy = () => {
               ensuring you find the perfect balloons for your event or business.
             </div>
           </div>
-          <div className="text-start mt-5">
+          <div className="mt-5">
             <div className="text-[18px] font-semibold">Step 2: Contact Us</div>
             <div>
               To place an order, please get in touch with us via email or phone.
@@ -76,7 +52,7 @@ const HowToBuy = () => {
               process.
             </div>
           </div>
-          <div className="text-start mt-5">
+          <div className="mt-5">
             <div className="text-[18px] font-semibold">
               Step 3: Provide Your Requirements
             </div>
@@ -90,7 +66,7 @@ const HowToBuy = () => {
               reach you.
             </div>
           </div>
-          <div className="text-start mt-5">
+          <div className="mt-5">
             <div className="text-[18px] font-semibold">
               Step 4: Receive a Quotation
             </div>
@@ -100,7 +76,7 @@ const HowToBuy = () => {
               the total cost, any applicable discounts, and payment details.
             </div>
           </div>
-          <div className="text-start mt-5">
+          <div className="mt-5">
             <div className="text-[18px] font-semibold">
               Step 5: Confirm Your Order
             </div>
@@ -110,7 +86,7 @@ const HowToBuy = () => {
               payment process and provide you with further instructions.
             </div>
           </div>
-          <div className="text-start mt-5">
+          <div className="mt-5">
             <div className="text-[18px] font-semibold">
               Step 6: Delivery or In-Person Pickup
             </div>
@@ -122,13 +98,13 @@ const HowToBuy = () => {
               so. Our team will be delighted to assist you in person.
             </div>
           </div>
-          <div className="text-start mt-10">
+          <div className="mt-10">
             If you have any additional questions or require further assistance,
             please do not hesitate to contact us. We value your business and
             look forward to serving you with our high-quality wholesale
             balloons.
           </div>
-          <div className="text-start mt-10">
+          <div className="mt-10">
             Thank you for choosing Balloreem. We are excited to be part of your
             upcoming events and celebrations.
           </div>

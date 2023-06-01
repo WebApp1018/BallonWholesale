@@ -24,12 +24,12 @@ const Home = () => {
   useEffect(() => {
     dispatch(getProdcutAsync());
     dispatch(getCategoryAsync());
-    console.log(products);
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
     if (categories) {
-      dispatch(getProdcutByCategoryAsync(categories[0].name));
+      dispatch(getProdcutByCategoryAsync("all"));
     }
   }, [categories]);
 
@@ -48,17 +48,22 @@ const Home = () => {
     <div>
       <Topbar />
       <div className="mb-[50px]">
-        <div className="w-full mt-1">
+        <div className="w-full flex items-center mt-1">
           <img
-            src="assets/img/header.jpg"
-            className="min-h-[300px] object-cover object-left"
+            src="assets/img/Banner-1.jpg"
+            className="w-full sm:w-1/2 min-h-[300px] object-cover object-left"
+            alt=""
+          />
+          <img
+            src="assets/img/Banner-3.jpg"
+            className="hidden sm:block w-1/2 min-h-[300px] object-cover object-left"
             alt=""
           />
         </div>
         <div className="mx-6 lg:mx-[100px]">
           <div className="mt-10">
             <img
-              src="assets/img/banner.png"
+              src="assets/img/Banner-2.jpg"
               className="hidden sm:block rounded-lg"
               alt=""
             />
@@ -79,7 +84,7 @@ const Home = () => {
                 .map((product, ind) => (
                   <div
                     key={ind}
-                    className="border rounded-lg shadow-lg flex-0 flex-shrink-1 mr-4 mb-4 basis-[43.5%] lg:basis-[18.6%]"
+                    className="border rounded-lg shadow-lg flex-0 flex-shrink-1 mr-4 mb-4 basis-[43.5%] lg:basis-[18%]"
                   >
                     <Link
                       to={`/balloon/detail/${product?.code}`}
@@ -127,26 +132,43 @@ const Home = () => {
                 </div>
               ))}
           </div>
-          <div className="flex flex-wrap justify-start mr-[-1rem] mt-5">
+          <div className="flex flex-wrap justify-between mr-[-1rem] mt-5">
             {productByCategory &&
-              productByCategory.slice(0, 10).map((product, ind) => (
-                <div
-                  key={ind}
-                  className="border rounded-lg shadow-lg flex-0 flex-shrink-1 mr-4 mb-4 basis-[43.5%] lg:basis-[18.6%]"
-                >
-                  <Link
-                    to={`/balloon/detail/${product?.code}`}
-                    className="w-full h-full flex flex-col justify-between"
-                  >
-                    <img
-                      src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image[0]}`}
-                      className="object-contain w-full h-auto"
-                      alt=""
-                    />
-                    <div className="mt-3 mb-5 text-center">{product?.name}</div>
-                  </Link>
-                </div>
-              ))}
+              [...Array(10)].map((_, index) => {
+                const product = productByCategory[index] || null;
+
+                if (product) {
+                  return (
+                    <div
+                      key={index}
+                      className="border rounded-lg shadow-lg flex-0 flex-shrink-1 mr-4 mb-4 basis-[43.5%] lg:basis-[18%]"
+                    >
+                      <Link
+                        to={`/balloon/detail/${product.code}`}
+                        className="w-full h-full flex flex-col justify-between"
+                      >
+                        <img
+                          src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product.image[0]}`}
+                          className="object-contain w-full h-auto"
+                          alt=""
+                        />
+                        <div className="mt-3 mb-5 text-center">
+                          {product.name}
+                        </div>
+                      </Link>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div
+                      key={index}
+                      className="h-0 flex-0 flex-shrink-1 mr-4 mb-4 basis-[43.5%] lg:basis-[18%]"
+                    >
+                      {/* Empty content */}
+                    </div>
+                  );
+                }
+              })}
           </div>
           <div className="w-full mt-[50px]">
             <Link

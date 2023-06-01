@@ -34,6 +34,7 @@ const BalloonDetail = () => {
 
   useEffect(() => {
     dispatch(getProdcutByCodeAsync(code));
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {

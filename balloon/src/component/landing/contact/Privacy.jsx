@@ -4,6 +4,7 @@ import Topbar from "../layout/Topbar";
 import Footer from "../layout/Footer";
 
 const Privacy = () => {
+  window.scrollTo(0, 0);
   return (
     <div>
       <Topbar />
@@ -14,15 +15,18 @@ const Privacy = () => {
               Privacy & Policy
             </div>
           </div>
-          <div className="w-full mt-[50px] px-[15px] sm:px-[100px] text-start">
-            <div>
+          <div className="hidden sm:block mt-10 mx-6 lg:mx-[100px]">
+            <img src="assets/img/Banner-2.jpg" className="rounded-lg" alt="" />
+          </div>
+          <div className="w-full mt-[50px] px-[15px] sm:px-[100px] text-justify">
+            <div className="text-[20px] font-semibold text-center">
               At Balloreem, we value your privacy and are committed to
               protecting the personal information you share with us. This
               Privacy Policy outlines how we collect, use, and safeguard your
               information in accordance with the applicable laws and regulations
               in the United Arab Emirates (UAE).
             </div>
-            <div className="text-start mt-10">
+            <div className="mt-10">
               <div className="text-[18px] font-semibold mb-3">
                 1. Information We Collect
               </div>
@@ -41,7 +45,7 @@ const Privacy = () => {
                 and browsing activities.
               </div>
             </div>
-            <div className="text-start mt-10">
+            <div className="mt-10">
               <div className="text-[18px] font-semibold mb-3">
                 2. Use of Information
               </div>
@@ -66,7 +70,7 @@ const Privacy = () => {
                 requests from government authorities.
               </div>
             </div>
-            <div className="text-start mt-10">
+            <div className="mt-10">
               <div className="text-[18px] font-semibold mb-3">
                 3. Data Protection
               </div>
@@ -86,7 +90,7 @@ const Privacy = () => {
                 required, it will be securely deleted or anonymized.
               </div>
             </div>
-            <div className="text-start mt-10">
+            <div className="mt-10">
               <div className="text-[18px] font-semibold mb-3">
                 4. Disclosure of Information
               </div>
@@ -108,7 +112,7 @@ const Privacy = () => {
                 policies, or address fraud or security issues.
               </div>
             </div>
-            <div className="text-start mt-10">
+            <div className="mt-10">
               <div className="text-[18px] font-semibold mb-3">
                 5. Your Rights
               </div>
@@ -133,7 +137,7 @@ const Privacy = () => {
                 by contacting us directly.
               </div>
             </div>
-            <div className="text-start mt-10">
+            <div className="mt-10">
               <div className="text-[18px] font-semibold mb-3">
                 6. Changes to this Privacy Policy
               </div>
@@ -145,7 +149,7 @@ const Privacy = () => {
                 updates.
               </div>
             </div>
-            <div className="text-start mt-10">
+            <div className="mt-10">
               <div className="text-[18px] font-semibold mb-3">
                 7. Contact Us
               </div>
@@ -166,7 +170,7 @@ const Privacy = () => {
                 </Link>
               </div>
             </div>
-            <div className="text-start mt-10">
+            <div className="mt-10">
               By using our website or providing your personal information to us,
               you signify your consent to the terms of this Privacy Policy.
             </div>

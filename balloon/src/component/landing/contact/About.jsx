@@ -3,6 +3,7 @@ import Topbar from "../layout/Topbar";
 import Footer from "../layout/Footer";
 
 const About = () => {
+  window.scrollTo(0, 0);
   return (
     <div>
       <Topbar />
@@ -12,9 +13,14 @@ const About = () => {
             About Us
           </div>
         </div>
-        <div className="w-full flex flex-col sm:flex-row items-center mt-[50px] px-[15px] sm:px-[100px]">
-          <div className="w-full text-start mt-5 sm:mt-0">
-            <div className="text-center text-[20px]">Welcome to Balloreem!</div>
+        <div className="hidden sm:block mt-10 mx-6 lg:mx-[100px]">
+          <img src="assets/img/Banner-2.jpg" className="rounded-lg" alt="" />
+        </div>
+        <div className="w-full flex flex-col sm:flex-row items-center mt-5 sm:mt-[50px] px-[15px] sm:px-[100px]">
+          <div className="w-full text-justify mt-5 sm:mt-0">
+            <div className="text-center text-[20px] font-semibold">
+              Welcome to Balloreem!
+            </div>
             <p className="mt-5">
               At Balloreem, we are proud to be a leading player in the wholesale
               balloon industry in the United Arab Emirates. Based in the vibrant

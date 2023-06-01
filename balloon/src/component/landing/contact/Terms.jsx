@@ -4,6 +4,7 @@ import Topbar from "../layout/Topbar";
 import Footer from "../layout/Footer";
 
 const Terms = () => {
+  window.scrollTo(0, 0);
   return (
     <div>
       <Topbar />
@@ -14,7 +15,10 @@ const Terms = () => {
               Terms & Conditions
             </div>
           </div>
-          <div className="w-full mt-[50px] px-[15px] sm:px-[100px] text-start">
+          <div className="hidden sm:block mt-10 mx-6 lg:mx-[100px]">
+            <img src="assets/img/Banner-2.jpg" className="rounded-lg" alt="" />
+          </div>
+          <div className="w-full mt-[50px] px-[15px] sm:px-[100px] text-justify">
             <div>
               Please read these Terms and Conditions ("Terms") carefully before
               using the website of Balloreem located at{" "}
@@ -27,7 +31,7 @@ const Terms = () => {
               agree with any part of these Terms, please refrain from using our
               website.
             </div>
-            <div className="text-start mt-10">
+            <div className="mt-10">
               <div className="text-[18px] font-semibold mb-3">
                 1. Intellectual Property
               </div>
@@ -49,7 +53,7 @@ const Terms = () => {
                 written consent.
               </div>
             </div>
-            <div className="text-start mt-10">
+            <div className="mt-10">
               <div className="text-[18px] font-semibold mb-3">
                 2. Website Use
               </div>

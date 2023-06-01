@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const configVars = require("./config/keys");
 const path = require("path");
-var cors = require('cors');
+var cors = require("cors");
 
 // Import routes
 const auth = require("./routes/api/auth");
@@ -20,28 +20,25 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 app.use(cors());
 app.options("*", cors());
-app.use('/public', express.static('public'));
+app.use("/public", express.static("public"));
 
 // Connect to MongoDB
 mongoose
-  .connect(
-    configVars.MONGODB_URI,
-    { useNewUrlParser: true }
-  )
+  .connect(configVars.MONGODB_URI, { useNewUrlParser: true })
   .then(() => console.log("MongoDB connected!"))
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
 // Use routes
 app.use("/api/auth", auth);
 app.use("/api/product", product);
 
 // Serve static files from the 'build' folder
-app.use(express.static(path.join(__dirname, 'balloon/build')));
+// app.use(express.static(path.join(__dirname, 'balloon/build')));
 
 // Handle other requests by serving the index.html file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'balloon/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'balloon/build/index.html'));
+// });
 
 // Start the server
 app.listen(port, () => {

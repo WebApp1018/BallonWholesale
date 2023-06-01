@@ -29,6 +29,7 @@ const Balloons = () => {
   useEffect(() => {
     dispatch(getProdcutAsync());
     dispatch(getCategoryAsync());
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {

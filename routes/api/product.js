@@ -25,6 +25,15 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+// Function to shuffle an array randomly
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 //@route    GET api/product/test
 //@desc     Tests auth route
 //@access   Public
@@ -76,15 +85,21 @@ router.get(
         .catch((err) => res.status(404).json(err));
     } else {
       Product.find()
-        .then((product) => {
-          if (!product) {
-            errors.noproduct = "There is no product in this category.";
+        .then((products) => {
+          if (!products || products.length === 0) {
+            errors.noproduct = "There are no products.";
             return res.status(404).json(errors);
           }
 
-          res.status(200).json(product);
+          // Randomize the order of products
+          const randomizedProducts = shuffleArray(products);
+
+          // Sort the randomized products
+          randomizedProducts.sort(() => Math.random() - 0.5);
+
+          res.status(200).json(randomizedProducts);
         })
-        .catch((err) => res.status(404).json(err));
+        .catch((err) => res.status(500).json(err));
     }
   }
 );

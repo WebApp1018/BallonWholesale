@@ -29,6 +29,8 @@ function App() {
         <Route path="/how_to_buy" element={<HowToBuy />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="/balloons/:category_name" element={<Balloons />} />
         <Route path="/balloon/detail/:code" element={<BalloonDetail />} />
         <Route
