@@ -1,4 +1,5 @@
 module.exports = {
-  MONGODB_URI: "mongodb+srv://daringwebdesigner:QsHA1Jq4oBdw6eT3@cluster0.owswhbo.mongodb.net/?retryWrites=true&w=majority",
-  JWT_SECRET: process.env.JWT_SECRET
+  MONGODB_URI:
+    "mongodb+srv://daringwebdesigner:QsHA1Jq4oBdw6eT3@cluster0.owswhbo.mongodb.net/?retryWrites=true&w=majority",
+  JWT_SECRET: process.env.JWT_SECRET,
 };
