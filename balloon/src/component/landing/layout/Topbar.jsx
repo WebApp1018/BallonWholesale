@@ -139,7 +139,7 @@ const Topbar = () => {
                   <Link
                     key={ind}
                     to={`/balloons/${category?.name}`}
-                    className="block pl-3 pr-4 text-white text-center md:hover:bg-transparent md:border-0 text-[16px] font-light md:hover:text-[#007dc5]"
+                    className="block pl-3 pr-4 text-white text-start md:hover:bg-transparent md:border-0 text-[16px] font-light md:hover:text-[#007dc5]"
                   >
                     {category.name}
                   </Link>
