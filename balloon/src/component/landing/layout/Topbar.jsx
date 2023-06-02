@@ -134,20 +134,12 @@ const Topbar = () => {
               </Link>
             </li>
             <li>
-              <Link
-                to="/balloons/all"
-                className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
-              >
-                Category
-              </Link>
-            </li>
-            <li>
               {categories &&
                 categories.map((category, ind) => (
                   <Link
                     key={ind}
                     to={`/balloons/${category?.name}`}
-                    className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[16px] font-light md:hover:text-[#007dc5]"
+                    className="block pl-3 pr-4 text-white text-center md:hover:bg-transparent md:border-0 text-[16px] font-light md:hover:text-[#007dc5]"
                   >
                     {category.name}
                   </Link>

@@ -40,6 +40,7 @@ const Balloons = () => {
       dispatch(getProdcutByCategoryAsync("all"));
       setSelectedCategory("all");
     }
+    window.scrollTo(0, 0);
   }, [category_name]);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ const Balloons = () => {
       setSelectedCategory(category);
       setCurrentPage(page);
       dispatch(getProdcutByCategoryAsync(category));
+      setCategoryMenu(true);
     }
   };
 
@@ -165,11 +167,11 @@ const Balloons = () => {
                   >
                     <Link
                       to={`/balloon/detail/${product?.code}`}
-                      className="w-full h-full flex flex-col justify-between"
+                      className="w-full h-full flex flex-col justify-between rounded-lg"
                     >
                       <img
                         src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image[0]}`}
-                        className="object-contain w-full h-auto"
+                        className="object-contain w-full h-auto rounded-lg"
                         alt=""
                       />
                       <div className="mt-3 mb-5">{product?.name}</div>
