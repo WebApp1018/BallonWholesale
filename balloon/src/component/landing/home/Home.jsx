@@ -31,6 +31,7 @@ const Home = () => {
     if (categories) {
       // dispatch(getProdcutByCategoryAsync("all"));
       dispatch(getProdcutByCategoryAsync(categories[0].name));
+      setSelectedCategory(categories[0].name);
     }
   }, [categories]);
 
