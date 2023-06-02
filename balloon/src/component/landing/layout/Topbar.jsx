@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { showCategory, getCategoryAsync } from "../../../app/categorySlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Topbar = () => {
+  const navigate = useNavigate();
+
   const [menu, setMenu] = useState(false);
 
   const dispatch = useDispatch();
@@ -15,6 +17,11 @@ const Topbar = () => {
 
   const toggleMenu = () => {
     menu ? setMenu(false) : setMenu(true);
+  };
+
+  const goNavegate = (to) => {
+    setMenu(false);
+    navigate(to);
   };
 
   return (
@@ -90,13 +97,13 @@ const Topbar = () => {
         <div className="fixed top-0 w-full h-screen bg-[#007dc5] shadow-lg z-[50]">
           <div className="flex mt-5 ml-7 mr-7 pb-5 border-b">
             <div className="">
-              <Link to="/">
+              <div onClick={() => goNavegate("/")}>
                 <img
                   className="w-[350px]"
                   src="/assets/img/Logo.png"
                   alt="logo"
                 />
-              </Link>
+              </div>
             </div>
             <div
               className="w-full flex justify-end"
@@ -118,48 +125,48 @@ const Topbar = () => {
           </div>
           <ul className="flex flex-col items-start ml-7 font-medium">
             <li>
-              <Link
-                to="/"
+              <div
+                onClick={() => goNavegate("/")}
                 className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
               >
                 Home
-              </Link>
+              </div>
             </li>
             <li>
-              <Link
-                to="/balloons/all"
+              <div
+                onClick={() => goNavegate("/balloons/all")}
                 className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
               >
                 Balloons
-              </Link>
+              </div>
             </li>
             <li>
               {categories &&
                 categories.map((category, ind) => (
-                  <Link
+                  <div
                     key={ind}
-                    to={`/balloons/${category?.name}`}
+                    onClick={() => goNavegate("/balloons/" + category?.name)}
                     className="block pl-3 pr-4 text-white text-start md:hover:bg-transparent md:border-0 text-[16px] font-light md:hover:text-[#007dc5]"
                   >
                     {category.name}
-                  </Link>
+                  </div>
                 ))}
             </li>
             <li>
-              <Link
-                to="/contact"
+              <div
+                onClick={() => goNavegate("/contact")}
                 className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
               >
                 Contact Us
-              </Link>
+              </div>
             </li>
             <li>
-              <Link
-                to="/about"
+              <div
+                onClick={() => goNavegate("/about")}
                 className="block pl-3 pr-4 text-white md:hover:bg-transparent md:border-0 text-[20px] font-bold md:hover:text-[#007dc5]"
               >
                 About Us
-              </Link>
+              </div>
             </li>
           </ul>
         </div>
