@@ -29,7 +29,8 @@ const Home = () => {
 
   useEffect(() => {
     if (categories) {
-      dispatch(getProdcutByCategoryAsync("all"));
+      // dispatch(getProdcutByCategoryAsync("all"));
+      dispatch(getProdcutByCategoryAsync(categories[0].name));
     }
   }, [categories]);
 
