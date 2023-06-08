@@ -4,6 +4,7 @@ import Topbar from "../layout/Topbar";
 import Footer from "../layout/Footer";
 
 const Contact = () => {
+  window.scrollTo(0, 0);
   return (
     <div>
       <Topbar />

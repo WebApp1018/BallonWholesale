@@ -116,7 +116,7 @@ const Footer = () => {
           </div>
           <ul className="w-full items-center mt-3 sm:mt-[15px]">
             {categories &&
-              categories.slice(0, 5).map((category, ind) => (
+              categories.map((category, ind) => (
                 <li className="mb-2" key={ind}>
                   <Link to={`/balloons/${category?.name}`}>
                     <div className="hover:underline">{category?.name}</div>
