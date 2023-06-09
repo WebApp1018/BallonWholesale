@@ -44,3 +44,12 @@ app.get("*", (req, res) => {
 app.listen(port, () => {
   console.log(`Balloon app listening at http://149.100.159.216:${port}`);
 });
+
+// RUN AS HTTPS SERVER ------------------
+// var fs = require('fs')
+// var https = require('https');
+// var privateKey  = fs.readFileSync('./src/cert/privkey.pem', 'utf8');
+// var certificate = fs.readFileSync('./src/cert/fullchain.pem', 'utf8');
+// var credentials = {key: privateKey, cert: certificate};
+// var httpsServer = https.createServer(credentials, app);
+// httpsServer.listen(443);
