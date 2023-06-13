@@ -47,6 +47,7 @@ app.get("*", (req, res) => {
 
 // RUN AS HTTPS SERVER ------------------
 var fs = require("fs");
+const http = require("http");
 var https = require("https");
 var privateKey = fs.readFileSync(
   "/etc/letsencrypt/live/balloreem.ae/privkey.pem",
@@ -57,5 +58,8 @@ var certificate = fs.readFileSync(
   "utf8"
 );
 var credentials = { key: privateKey, cert: certificate };
+
+const httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
+httpServer.listen(80);
 httpsServer.listen(443);
