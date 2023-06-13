@@ -38,7 +38,7 @@ const Contact = () => {
               </div>
               <Link
                 target="_blank"
-                to="https://www.google.com/maps/search/?api=1&query=Al Muroor Rd Building Nr 6. Next To Al Mandoos - Abu Dhabi"
+                to="https://www.google.com/maps/place/Balloreem+Gifts/@24.4638435,54.3862185,17z/data=!3m1!4b1!4m6!3m5!1s0x3e5e662a0d7dc29f:0x3f4a3ada773bcbfc!8m2!3d24.4638435!4d54.3862185!16s%2Fg%2F11c1w_ztt8?entry=ttu"
                 className="bg-[#007dc5] px-3 py-2 rounded-md hover:bg-blue-700 font-semibold text-white"
               >
                 Find us on the Map
