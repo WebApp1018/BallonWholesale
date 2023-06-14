@@ -28,11 +28,11 @@ mongoose
   .then(() => console.log("MongoDB connected!"))
   .catch((err) => console.log(err));
 
-// const httpApp = express();
-// httpApp.get("*", function (req, res, next) {
-//   res.redirect(301, `https://${req.headers.host}${req.url}`);
-// });
-// httpApp.listen(80);
+const httpApp = express();
+httpApp.get("*", function (req, res, next) {
+  res.redirect(301, `https://${req.headers.host}${req.url}`);
+});
+httpApp.listen(80);
 
 // Use routes
 app.use("/api/auth", auth);
