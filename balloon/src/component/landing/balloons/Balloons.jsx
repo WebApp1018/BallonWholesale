@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
@@ -214,7 +215,20 @@ const Balloons = () => {
                       onClick={() =>
                         displayProduct(selectedCategory, pageNumber)
                       }
-                      className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 "
+                      className={classNames(
+                        "px-3",
+                        "py-2",
+                        "leading-tight",
+                        "border",
+                        "hover:bg-gray-100",
+                        "hover:text-gray-700",
+                        "text-gray-500",
+                        "border-gray-300",
+                        {
+                          "bg-[#002f75]": currentPage === pageNumber,
+                          "text-white": currentPage === pageNumber,
+                        }
+                      )}
                     >
                       {pageNumber}
                     </Link>
