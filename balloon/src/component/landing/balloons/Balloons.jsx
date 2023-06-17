@@ -175,6 +175,8 @@ const Balloons = () => {
                         src={`${process.env.REACT_APP_API_BASE_URL}public/upload/${product?.image[0]}`}
                         className="object-contain w-full h-auto rounded-lg"
                         alt=""
+                        width="100%"
+                        height="100%"
                       />
                       <div className="mt-3 mb-5">{product?.name}</div>
                     </Link>
