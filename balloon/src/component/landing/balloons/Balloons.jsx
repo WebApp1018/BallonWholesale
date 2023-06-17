@@ -51,9 +51,10 @@ const Balloons = () => {
       setProductToDisplay(productByCategory.slice(startIndex, endIndex));
     }
     window.scrollTo(0, 0);
-  }, [productByCategory, currentPage, itemsPerPage]);
+  }, [productByCategory]);
 
   const displayProduct = (category = selectedCategory, page = 1) => {
+    console.log("displayprojuct");
     if (!totalPages || (page && page <= totalPages)) {
       setSelectedCategory(category);
       setCurrentPage(page);

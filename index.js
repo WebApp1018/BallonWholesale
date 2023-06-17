@@ -65,6 +65,7 @@ var certificate = fs.readFileSync(
 
 // var privateKey = fs.readFileSync("./cert-test/privkey.pem", "utf8");
 // var certificate = fs.readFileSync("./cert-test/fullchain.pem", "utf8");
+
 var credentials = { key: privateKey, cert: certificate };
 
 var httpsServer = https.createServer(credentials, app);
