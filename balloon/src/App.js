@@ -13,6 +13,7 @@ import Terms from "./component/landing/contact/Terms";
 import AdDashboard from "./component/admin/dashboard/AdDashboard";
 import AdBalloons from "./component/admin/balloon/AdBalloons";
 import AdCategory from "./component/admin/balloon/AdCategory";
+import AdSetting from "./component/admin/dashboard/AdSetting";
 import PrivateRoute from "./utils/PrivateRoute";
 import logo from "./logo.svg";
 import "./App.css";
@@ -54,6 +55,14 @@ function App() {
           element={
             <PrivateRoute auth={localStorage.jwtToken}>
               <AdCategory />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/setting/:user_id"
+          element={
+            <PrivateRoute auth={localStorage.jwtToken}>
+              <AdSetting />
             </PrivateRoute>
           }
         />

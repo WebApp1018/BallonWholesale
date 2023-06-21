@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode";
 
 const AdSideBar = ({ show_side_bar, logout }) => {
-  // const decoded = jwt_decode(localStorage.jwtToken);
+  const decoded = jwt_decode(localStorage.jwtToken);
 
   return (
     <div
@@ -111,7 +111,7 @@ const AdSideBar = ({ show_side_bar, logout }) => {
             </li>
             <li>
               <Link
-                // to={`/ad_dashboard/profile/${decoded.id}`}
+                to={`/admin/setting/${decoded.id}`}
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:text-[#F8981D] border-l-4 border-transparent hover:border-[#F8981D] pr-6"
               >
                 <span className="inline-flex justify-center items-center ml-4">

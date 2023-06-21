@@ -46,7 +46,7 @@ const Login = () => {
         navigate("/admin");
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
         setErrors(err.response.data);
       });
   };
@@ -109,31 +109,6 @@ const Login = () => {
                         {errors.password}
                       </p>
                     )}
-                  </div>
-                  <div className="flex justify-between">
-                    <div className="flex items-start">
-                      <div className="flex items-center h-5">
-                        <input
-                          id="remember"
-                          type="checkbox"
-                          value=""
-                          className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300"
-                          required
-                        />
-                      </div>
-                      <label
-                        htmlFor="remember"
-                        className="ml-2 text-sm font-medium text-gray-900"
-                      >
-                        Remember me
-                      </label>
-                    </div>
-                    <Link
-                      to="/forgot"
-                      className="text-sm text-[#F8981D] hover:underline"
-                    >
-                      Lost Password?
-                    </Link>
                   </div>
                   <button
                     type="submit"
