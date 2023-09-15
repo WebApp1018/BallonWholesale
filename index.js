@@ -3,6 +3,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const configVars = require("./config/keys");
+const compression = require("compression");
 const path = require("path");
 var cors = require("cors");
 
@@ -16,6 +17,7 @@ const app = express();
 // General middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(compression());
 app.use(passport.initialize());
 require("./config/passport")(passport);
 app.use(cors());
@@ -55,11 +57,11 @@ app.get("*", (req, res) => {
 var fs = require("fs");
 var https = require("https");
 var privateKey = fs.readFileSync(
-  "/etc/letsencrypt/live/balloreem.ae-0001/privkey.pem",
+  "/etc/letsencrypt/live/balloreem.ae/privkey.pem",
   "utf8"
 );
 var certificate = fs.readFileSync(
-  "/etc/letsencrypt/live/balloreem.ae-0001/fullchain.pem",
+  "/etc/letsencrypt/live/balloreem.ae/fullchain.pem",
   "utf8"
 );
 

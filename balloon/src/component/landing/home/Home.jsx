@@ -52,12 +52,12 @@ const Home = () => {
       <div className="mb-[50px]">
         <div className="w-full flex items-center mt-1">
           <img
-            src="assets/img/Banner-1.jpg"
+            src="assets/img/Banner-1.webp"
             className="w-full sm:w-1/2 min-h-[300px] object-cover object-left"
             alt=""
           />
           <img
-            src="assets/img/Banner-3.jpg"
+            src="assets/img/Banner-3.webp"
             className="hidden sm:block w-1/2 min-h-[300px] object-cover object-left"
             alt=""
           />
@@ -65,7 +65,7 @@ const Home = () => {
         <div className="mx-6 lg:mx-[100px]">
           <div className="mt-10">
             <img
-              src="assets/img/Banner-2.jpg"
+              src="assets/img/Banner-2.webp"
               className="hidden sm:block rounded-lg"
               alt=""
             />
