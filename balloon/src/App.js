@@ -22,7 +22,7 @@ const AdBalloons = lazy(() => import("./component/admin/balloon/AdBalloons"));
 const AdCategory = lazy(() => import("./component/admin/balloon/AdCategory"));
 const AdSetting = lazy(() => import("./component/admin/dashboard/AdSetting"));
 
-const renderLoader = () => <p>Loading</p>;
+const renderLoader = () => <p></p>;
 
 function App() {
   const auth = useSelector(getAuth);
