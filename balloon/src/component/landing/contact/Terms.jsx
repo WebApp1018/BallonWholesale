@@ -41,7 +41,7 @@ const Terms = () => {
                 graphics, logos, images, and software, is protected by
                 applicable copyright, trademark, and other intellectual property
                 laws. The ownership and intellectual property rights of such
-                content belong to [Your Wholesale Balloons Business].
+                content belong to Balloreem Gifts LLC.
               </div>
               <div className="ml-5 mb-3">
                 <span className="font-semibold">1.2 Restricted Use:</span> You
